@@ -7,4 +7,4 @@ https://docs.google.com/document/d/1tSAFTTgo5l4CAf2x9fFHQCuG0fYmOD8H5YnAuef8rGo/
 - Hasin Raihan
 
 ## Description
-A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiwi. The goal is to send balloons to the opposing computer and get past their towers, while building and upgrading your own towers. As each round passes, more balloons and towers can be unlocked and more money is made. Each balloon and tower has its own special feature and cost. 
+A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiwi. The goal is to build and upgrade your towers while the computer sends balloons at you. As each round passes, you receive money based on your interest rate, which you can use to buy newly unlocked towers to defend against increasingly stronger balloons. Each balloon and tower has its own special feature and cost. 
