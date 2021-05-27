@@ -20,3 +20,7 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Added ellipse for dartmonkey in menu, with drag and drop functionality.
 - Note: Path checker is slightly innacurate, it allows for towers to partially cover the path.
  
+5/27: Group Call during free
+- Created balloon class with basic speed variable and move and display methods
+- Balloons follow the general path, however there is a slight offset due to patches
+- Note: new balloon is created each draw loop, causing snake-like trail
