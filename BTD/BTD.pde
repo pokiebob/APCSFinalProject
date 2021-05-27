@@ -1,7 +1,7 @@
 //Balloon Tower Defense
      
-int xPatch = 16;
-int yPatch = 15;
+int colPatch = 16;
+int rowPatch = 15;
 ArrayList<Tower> towers = new ArrayList<Tower>();
 int[][] background = pumpkinPatch();
 
@@ -10,16 +10,14 @@ Tower curTower;
 
 void setup(){
   size(1200,750);
-  setBackground();
- 
-  
+  setBackground(); 
 }
 
 void setBackground() {
   background(200);
   /* Creates 15 x 16 (grid) */
-  for(int i = 0; i < yPatch; i++){
-    for(int j = 0; j < xPatch; j++){
+  for(int i = 0; i < rowPatch; i++){
+    for(int j = 0; j < colPatch; j++){
       if (background[i][j]==1){
         fill(255);
         rect(j*50,i*50,50,50);
@@ -33,10 +31,11 @@ void setBackground() {
 }
 
 void draw(){
-  
+
   setBackground();
   Tower dartMonkey = new Tower(20, 4);
   dartMonkey.display();
+  makeBalloon();
   
   for (Tower t : towers) {
     t.display();
@@ -76,6 +75,17 @@ void draw(){
      cursor(ARROW);
      noStroke();
    }
+}
+
+void makeBalloon(){
+  Balloon bloon = new Balloon(100, 15, 1);
+  bloon.display();
+}
+
+void keyPressed(){
+  if (key == 32){
+    towers.clear(); 
+  }
 }
 
 int[] locatePatch() {
