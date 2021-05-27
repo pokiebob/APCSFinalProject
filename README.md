@@ -12,9 +12,11 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 ## Development Log
 
 5/25: Group Call after School
-  Decided on the screen size and size of patches, created basic path.
+- Decided on the screen size and size of patches
+- Created basic path.
 
 5/26: Cyrus
-  Moved tower menu to the right of the screen. Added ellipse for dartmonkey in menu, with drag and drop functionality.
-  Note: Path checker is slightly innacurate, it allows for towers to partially cover the path.
+- Moved tower menu to the right of the screen. 
+- Added ellipse for dartmonkey in menu, with drag and drop functionality.
+- Note: Path checker is slightly innacurate, it allows for towers to partially cover the path.
  
