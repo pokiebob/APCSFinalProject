@@ -3,6 +3,7 @@
 int colPatch = 16;
 int rowPatch = 15;
 ArrayList<Tower> towers = new ArrayList<Tower>();
+ArrayList<Balloon> balloons = new ArrayList<Balloon>();
 int[][] background = pumpkinPatch();
 
 boolean towerSelected = false;
@@ -35,7 +36,10 @@ void draw(){
   setBackground();
   Tower dartMonkey = new Tower(20, 4);
   dartMonkey.display();
+  
+  
   makeBalloon();
+  moveBalloons();
   
   for (Tower t : towers) {
     t.display();
@@ -78,8 +82,41 @@ void draw(){
 }
 
 void makeBalloon(){
-  Balloon bloon = new Balloon(100, 15, 1);
-  bloon.display();
+  Balloon bloon = new Balloon(100, 15.5, 1.5);
+  balloons.add(bloon);  
+}
+
+void moveBalloons(){
+  //
+  for (Balloon b : balloons) {    
+     b.display();
+     //double[] patch = locatePatch(b.curX, b.curY);
+     
+     if(b.curX <= 75){
+       if (b.curY < 275 || (b.curY >= 475 && b.curY < 675)) {
+         //Move down (first move down)
+         b.move(0,1);
+       }
+       else {
+         //Move right
+         b.move(1,0);
+       }
+     }
+     else if (b.curY == 75 || b.curY == 475){
+       //Moves left
+       b.move(-1, 0);
+     }
+     else if (b.curX == 725 && b.curY < 525){
+       //Move down (right side move down)
+       b.move(0, 1);
+     }
+     else {
+       //Move right (last row)
+       print(b.curX + "," + b.curY);
+       b.move(1, 0);
+     }
+     
+  }
 }
 
 void keyPressed(){
@@ -90,6 +127,10 @@ void keyPressed(){
 
 int[] locatePatch() {
   return new int[] { (int) mouseX / 50, (int) mouseY / 50 };
+}
+
+double[] locatePatch(int x, int y) {
+  return new double[] { x / 50, y / 50};
 }
 
 boolean isLegalTowerPlacement() {
