@@ -5,6 +5,7 @@ int rowPatch = 15;
 ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Balloon> balloons = new ArrayList<Balloon>();
 int[][] background = pumpkinPatch();
+int ticks = 0;
 
 boolean towerSelected = false;
 Tower curTower;
@@ -38,14 +39,34 @@ void draw(){
   dartMonkey.display();
   
   
-  makeBalloon();
+  spawnBalloon();
   moveBalloons();
   
   for (Tower t : towers) {
     t.display();
   }
   
-   if (towerSelected) {
+  dragTower();
+  
+  ticks++;
+}
+
+void spawnBalloon() {
+  if (ticks <= 100) {
+     if (ticks % 10 == 0) {
+       makeBalloon();
+     }
+  }
+  if (ticks >= 200 && ticks <= 300) {
+    if (ticks % 10 == 0) {
+      makeBalloon();
+    }
+  }
+  
+}
+
+void dragTower() {
+  if (towerSelected) {
      //System.out.println("towerSelected");
      if (mousePressed) {
        //System.out.print(" and mouse pressed \n");
@@ -78,7 +99,7 @@ void draw(){
      //System.out.println("tower not in range");
      cursor(ARROW);
      noStroke();
-   }
+   } 
 }
 
 void makeBalloon(){
@@ -112,7 +133,7 @@ void moveBalloons(){
      }
      else {
        //Move right (last row)
-       print(b.curX + "," + b.curY);
+       //print(b.curX + "," + b.curY);
        b.move(1, 0);
      }
      
