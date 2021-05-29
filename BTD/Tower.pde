@@ -10,7 +10,7 @@ public class Tower {
   Tower(int x, int y) {
     cost = 200;
     damage = 1;
-    range = 124;
+    range = 150;
     c = color(175, 100, 0);
     this.x = x * 50;
     this.y = y * 50;

@@ -87,6 +87,8 @@ void dragTower() {
        cursor(HAND);
        curTower.drag();
        curTower.display();
+       fill(255, 255, 255, 50);
+       ellipse(curTower.x, curTower.y,curTower.range * 2, curTower.range * 2); 
      } else {
        cursor(ARROW);
        towerSelected = false;
