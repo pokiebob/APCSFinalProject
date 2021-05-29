@@ -109,7 +109,8 @@ void makeBalloon(){
 
 void moveBalloons(){
   //
-  for (Balloon b : balloons) {    
+  for (int i = 0; i < balloons.size(); i++) {   
+    Balloon b = balloons.get(i);
      b.display();
      //double[] patch = locatePatch(b.curX, b.curY);
      
@@ -137,7 +138,12 @@ void moveBalloons(){
        b.move(1, 0);
      }
      
+     if (b.curX >= 800 && b.curY >= 600) {
+       balloons.remove(i);
+     }
+     
   }
+  
 }
 
 void keyPressed(){
