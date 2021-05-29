@@ -178,8 +178,24 @@ boolean isLegalTowerPlacement() {
   if (mouseX > 800) {
     return false;
   }
-  int[] patch = locatePatch();
-  return background[patch[1]][patch[0]] == 0;
+  double[] patch;
+  patch = locatePatch(mouseX + 25, mouseY);
+  if (background[(int) patch[1]][(int) patch[0]] == 1) {
+    return false;
+  }
+  patch = locatePatch(mouseX - 25, mouseY);
+  if (background[(int) patch[1]][(int) patch[0]] == 1) {
+    return false;
+  }
+  patch = locatePatch(mouseX, mouseY + 25);
+  if (background[(int) patch[1]][(int) patch[0]] == 1) {
+    return false;
+  }
+  patch = locatePatch(mouseX, mouseY - 25);
+  if (background[(int) patch[1]][(int) patch[0]] == 1) {
+    return false;
+  }
+  return true;
 }
 
 int[][] pumpkinPatch(){
