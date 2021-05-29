@@ -5,7 +5,7 @@ public class Tower {
   int range;
   int speed;
   color c;
-  float x, y;
+  int x, y;
   
   Tower(int x, int y) {
     cost = 200;

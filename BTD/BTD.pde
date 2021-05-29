@@ -1,4 +1,5 @@
 //Balloon Tower Defense
+import java.util.Arrays;
      
 int colPatch = 16;
 int rowPatch = 15;
@@ -179,21 +180,28 @@ boolean isLegalTowerPlacement() {
     return false;
   }
   double[] patch;
-  patch = locatePatch(mouseX + 25, mouseY);
-  if (background[(int) patch[1]][(int) patch[0]] == 1) {
-    return false;
-  }
-  patch = locatePatch(mouseX - 25, mouseY);
-  if (background[(int) patch[1]][(int) patch[0]] == 1) {
-    return false;
-  }
-  patch = locatePatch(mouseX, mouseY + 25);
-  if (background[(int) patch[1]][(int) patch[0]] == 1) {
-    return false;
-  }
-  patch = locatePatch(mouseX, mouseY - 25);
-  if (background[(int) patch[1]][(int) patch[0]] == 1) {
-    return false;
+  int value;
+  for (Tower t : towers) {
+    patch = locatePatch(mouseX + 25, mouseY);
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1 || Arrays.equals(patch, locatePatch(t.x + 25, t.y))) {
+      return false;
+    }
+    patch = locatePatch(mouseX - 25, mouseY);
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1 || Arrays.equals(patch, locatePatch(t.x -  25, t.y))) {
+      return false;
+    }
+    patch = locatePatch(mouseX, mouseY + 25);
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1 || Arrays.equals(patch, locatePatch(t.x, t.y + 25))) {
+      return false;
+    }
+    patch = locatePatch(mouseX, mouseY - 25);
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1 || Arrays.equals(patch, locatePatch(t.x, t.y - 25))) {
+      return false;
+    }
   }
   return true;
 }
