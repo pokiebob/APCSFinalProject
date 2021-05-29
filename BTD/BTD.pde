@@ -6,6 +6,7 @@ ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Balloon> balloons = new ArrayList<Balloon>();
 int[][] background = pumpkinPatch();
 int ticks = 0;
+int lives = 150;
 
 boolean towerSelected = false;
 Tower curTower;
@@ -35,6 +36,7 @@ void setBackground() {
 void draw(){
 
   setBackground();
+  lifeBar();
   Tower dartMonkey = new Tower(20, 4);
   dartMonkey.display();
   
@@ -49,6 +51,17 @@ void draw(){
   dragTower();
   
   ticks++;
+}
+
+void lifeBar() {
+  fill(255, 0, 0);
+  rect(0, 0, 800, 25);
+  fill(0,255,0);
+  rect(0, 0, lives * 16 / 3, 25);
+  
+  fill(0);
+  textSize(20);
+  text("" + lives, 12.5, 20);
 }
 
 void spawnBalloon() {
@@ -103,7 +116,7 @@ void dragTower() {
 }
 
 void makeBalloon(){
-  Balloon bloon = new Balloon(100, 15.5, 1.5);
+  Balloon bloon = new Balloon(1, 15.5, 1.5);
   balloons.add(bloon);  
 }
 
@@ -139,6 +152,7 @@ void moveBalloons(){
      }
      
      if (b.curX >= 800 && b.curY >= 600) {
+       lives -= b.health;
        balloons.remove(i);
      }
      
