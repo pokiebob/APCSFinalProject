@@ -24,3 +24,10 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Created balloon class with basic speed variable and move and display methods
 - Balloons follow the general path, however there is a slight offset due to patches
 - Note: new balloon is created each draw loop, causing snake-like trail
+
+5/29: Cyrus
+- Starting using ticks to manage balloon spawn rate
+- Balloons now take away lives when they reach the end of the path
+- Created health bar at the top proportional to number of lives
+- Towers can no longer be placed overlapping with each other or the path
+- Tower range is displayed using low transparency circle when selected
