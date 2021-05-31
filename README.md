@@ -31,3 +31,10 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Created health bar at the top proportional to number of lives
 - Towers can no longer be placed overlapping with each other or the path
 - Tower range is displayed using low transparency circle when selected
+
+5/31: Group Call
+- Started bullet class, displayed bullet, and got bullet to move across the screen
+- Worked on making the bullets disappear when it reaches the tower's range
+- Next step is taking the bullet direction into account
+- Encountered displaying glitch where the path suddenly became shifted (resolved)
+- Encountered a glitch where the first tower made can be placed on the white path if it overlaps with the balloons (unresolved)
