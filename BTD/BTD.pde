@@ -5,6 +5,7 @@ int colPatch = 16;
 int rowPatch = 15;
 ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Balloon> balloons = new ArrayList<Balloon>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>(); 
 int[][] background = pumpkinPatch();
 int ticks = 0;
 int lives = 150;
@@ -44,6 +45,7 @@ void draw(){
   
   spawnBalloon();
   moveBalloons();
+  moveBullets();
   
   for (Tower t : towers) {
     t.display();
@@ -52,6 +54,16 @@ void draw(){
   dragTower();
   
   ticks++;
+  
+  //moveBullets();
+}
+
+void moveBullets(){
+  for (int i = 0; i < bullets.size(); i++){
+    Bullet b = bullets.get(i);
+    b.display();
+    b.move();
+  }
 }
 
 void lifeBar() {
@@ -87,6 +99,7 @@ void dragTower() {
        cursor(HAND);
        curTower.drag();
        curTower.display();
+       //Range
        fill(255, 255, 255, 50);
        ellipse(curTower.x, curTower.y,curTower.range * 2, curTower.range * 2); 
      } else {
@@ -163,9 +176,15 @@ void moveBalloons(){
   
 }
 
+//Bullets!
 void keyPressed(){
   if (key == 32){
-    towers.clear(); 
+    //towers.clear(); 
+    for (Tower t: towers){
+      Bullet b = new Bullet(t.damage, t.speed, t.range, t.x, t.y, 0); 
+      b.display();
+      bullets.add(b);
+    }
   }
 }
 
