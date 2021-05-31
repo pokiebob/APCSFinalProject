@@ -11,7 +11,7 @@ public class Tower {
     cost = 200;
     damage = 1;
     range = 150;
-    speed = 10;
+    speed = 5;
     c = color(175, 100, 0);
     this.x = x * 50;
     this.y = y * 50;

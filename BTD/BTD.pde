@@ -61,8 +61,14 @@ void draw(){
 void moveBullets(){
   for (int i = 0; i < bullets.size(); i++){
     Bullet b = bullets.get(i);
-    b.display();
-    b.move();
+    if (b.range <= 0){
+      bullets.remove(i); 
+    }
+    else {
+      b.display();
+      b.move();
+    }
+    
   }
 }
 

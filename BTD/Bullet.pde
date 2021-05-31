@@ -25,6 +25,7 @@ public class Bullet {
   
   void move(){
     curY += speed;
+    range -= speed;
     //print(curY);
   }
  
