@@ -187,7 +187,7 @@ void keyPressed(){
   if (key == 32){
     //towers.clear(); 
     for (Tower t: towers){
-      Bullet b = new Bullet(t.damage, t.speed, t.range, t.x, t.y, 0); 
+      Bullet b = new Bullet(t.damage, t.speed, t.range, t.x, t.y, 45); 
       b.display();
       bullets.add(b);
     }

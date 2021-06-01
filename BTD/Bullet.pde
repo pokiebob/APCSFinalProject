@@ -24,7 +24,8 @@ public class Bullet {
   }
   
   void move(){
-    curY += speed;
+    curY += sin(radians(direction)) * speed;
+    curX += cos(radians(direction)) * speed;
     range -= speed;
     //print(curY);
   }
