@@ -46,6 +46,7 @@ void draw(){
   spawnBalloon();
   moveBalloons();
   moveBullets();
+  detectBalloon();
   
   for (Tower t : towers) {
     t.display();
@@ -56,6 +57,24 @@ void draw(){
   ticks++;
   
   //moveBullets();
+}
+
+void detectBalloon() {
+  for (Tower t : towers) {
+    for (Balloon balloon : balloons) {
+      if (isInRange(balloon, t)) {
+        //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
+        int direction = 360 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
+        Bullet b = new Bullet(t.damage, t.speed, t.range, t.x, t.y, direction); 
+        b.display();
+        bullets.add(b);
+      }
+    }
+  }
+}
+
+boolean isInRange(Balloon b, Tower t) {
+  return (dist(b.curX, b.curY, t.x, t.y) <= t.range);
 }
 
 void moveBullets(){
