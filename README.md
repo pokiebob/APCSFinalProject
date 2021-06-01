@@ -38,3 +38,8 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Next step is taking the bullet direction into account
 - Encountered displaying glitch where the path suddenly became shifted (resolved)
 - Encountered a glitch where the first tower made can be placed on the white path if it overlaps with the balloons (unresolved)
+
+6/1: Classwork
+- Bullets now face and shoot in the correct direction (angle)
+- Towers shoot when they detect balloons
+- Note: Timer must be implemented so that there is an interval between each shot
