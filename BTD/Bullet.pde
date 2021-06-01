@@ -21,14 +21,14 @@ public class Bullet {
     rectMode(CENTER);
     pushMatrix();
     translate(curX, curY);
-    rotate(-1 * radians(direction));
+    rotate(radians(direction));
     rect(0, 0, 10, 20);
     popMatrix();
     rectMode(CORNER);
   }
   
   void move(){
-    curY += sin(radians(direction)) * speed;
+    curY -= sin(radians(direction)) * speed;
     curX += cos(radians(direction)) * speed;
     range -= speed;
     //print(curY);

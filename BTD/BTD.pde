@@ -64,7 +64,7 @@ void detectBalloon() {
     for (Balloon balloon : balloons) {
       if (isInRange(balloon, t)) {
         //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
-        int direction = 360 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
+        int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
         Bullet b = new Bullet(t.damage, t.speed, t.range, t.x, t.y, direction); 
         b.display();
         bullets.add(b);
