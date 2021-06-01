@@ -19,7 +19,11 @@ public class Bullet {
   void display(){
     fill(0,0,255);
     rectMode(CENTER);
-    rect(curX, curY, 10, 20);
+    pushMatrix();
+    translate(curX, curY);
+    rotate(-1 * radians(direction));
+    rect(0, 0, 10, 20);
+    popMatrix();
     rectMode(CORNER);
   }
   
