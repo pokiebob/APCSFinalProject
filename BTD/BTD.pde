@@ -47,6 +47,7 @@ void draw(){
   moveBalloons();
   moveBullets();
   detectBalloon();
+  reloadTowers();
   
   for (Tower t : towers) {
     t.display();
@@ -55,20 +56,35 @@ void draw(){
   dragTower();
   
   ticks++;
-  
-  //moveBullets();
+ 
+}
+
+void reloadTowers() {
+  for (Tower t : towers) {
+    if (! t.canShoot) {
+      if (t.timer <= 0) {
+        t.canShoot = true;
+        t.timer = t.speed;
+      }
+      t.timer -= 1.0 / 60;
+    }
+  }
 }
 
 void detectBalloon() {
   for (Tower t : towers) {
-    for (Balloon balloon : balloons) {
-      if (isInRange(balloon, t)) {
-        //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
-        int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
-        Bullet b = new Bullet(t.damage, t.speed, t.range, t.x, t.y, direction); 
-        b.display();
-        bullets.add(b);
+    int i = 0;
+    while (t.canShoot && i < balloons.size()) {
+      Balloon balloon = balloons.get(i);
+        if (isInRange(balloon, t)) {
+          //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
+          int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
+          Bullet b = new Bullet(t.damage, 5, t.range, t.x, t.y, direction); 
+          b.display();
+          bullets.add(b);
+          t.canShoot = false;
       }
+      i++;
     }
   }
 }
@@ -206,7 +222,7 @@ void keyPressed(){
   if (key == 32){
     //towers.clear(); 
     for (Tower t: towers){
-      Bullet b = new Bullet(t.damage, t.speed, t.range, t.x, t.y, 135); 
+      Bullet b = new Bullet(t.damage, 5, t.range, t.x, t.y, 135); 
       b.display();
       bullets.add(b);
     }

@@ -3,18 +3,22 @@ public class Tower {
   int cost;
   int damage;
   int range;
-  int speed;
+  double speed;
+  double timer;
   color c;
   int x, y;
+  boolean canShoot;
   
   Tower(int x, int y) {
     cost = 200;
     damage = 1;
     range = 150;
-    speed = 5;
+    speed = 0.45;
+    timer = speed;
     c = color(175, 100, 0);
     this.x = x * 50;
     this.y = y * 50;
+    canShoot = true;
   }
   
   void drag() {
