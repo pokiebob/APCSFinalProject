@@ -3,6 +3,9 @@ import java.util.Arrays;
      
 int colPatch = 16;
 int rowPatch = 15;
+int bank = 650; 
+int income = 100; 
+//int time = 0;
 ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Balloon> balloons = new ArrayList<Balloon>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>(); 
@@ -39,9 +42,9 @@ void draw(){
 
   setBackground();
   lifeBar();
-  Tower dartMonkey = new Tower(20, 4);
+  displayStats();
+  Tower dartMonkey = new Tower(20, 6);
   dartMonkey.display();
-  
   
   spawnBalloon();
   moveBalloons();
@@ -57,6 +60,15 @@ void draw(){
   
   ticks++;
  
+}
+
+void displayStats(){
+  textSize(32);
+  textAlign(CENTER);
+  text("Round: " + 1, 1000, 50); 
+  text("Bank: " + bank, 1000, 100); 
+  text("Income: " + income, 1000, 150); 
+  textAlign(LEFT);
 }
 
 void reloadTowers() {
@@ -162,15 +174,16 @@ void dragTower() {
        if (isLegalTowerPlacement()) {
          //System.out.println("legal tower placement");
          towers.add(curTower);
+         bank -= curTower.cost;
        }
        //System.out.println(locatePatch()[0] + " " + locatePatch()[1]);
      }
    }
-   else if (dist(1000, 200, mouseX, mouseY) < 25) {
+   else if (dist(1000, 300, mouseX, mouseY) < 25) {
       //System.out.println("tower not selected");
       cursor(HAND);
       if (mousePressed) {
-        Tower newDartMonkey = new Tower(20, 4);
+        Tower newDartMonkey = new Tower(20, 6);
         curTower = newDartMonkey;
         towerSelected = true;
       }
@@ -226,17 +239,16 @@ void moveBalloons(){
   
 }
 
-//Bullets!
-void keyPressed(){
-  if (key == 32){
-    //towers.clear(); 
-    for (Tower t: towers){
-      Bullet b = new Bullet(t.damage, 15, t.range, t.x, t.y, 135); 
-      b.display();
-      bullets.add(b);
-    }
-  }
-}
+//void keyPressed(){
+//  if (key == 32){
+//    //towers.clear(); 
+//    for (Tower t: towers){
+//      Bullet b = new Bullet(t.damage, 15, t.range, t.x, t.y, 135); 
+//      b.display();
+//      bullets.add(b);
+//    }
+//  }
+//}
 
 int[] locatePatch() {
   return new int[] { (int) mouseX / 50, (int) mouseY / 50 };
