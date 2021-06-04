@@ -259,7 +259,7 @@ double[] locatePatch(int x, int y) {
 }
 
 boolean isLegalTowerPlacement() {
-  if (mouseX > 800) {
+  if (mouseX > 800 || bank < curTower.cost) {
     return false;
   }
   double[] patch;
