@@ -12,7 +12,7 @@ public class Tower {
   Tower(int x, int y) {
     cost = 200;
     damage = 1;
-    range = 150;
+    range = 175;
     speed = 0.45;
     timer = speed;
     c = color(175, 100, 0);

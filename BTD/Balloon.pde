@@ -2,7 +2,7 @@ public class Balloon {
   
   int health;
   int curX, curY;
-  int speed;
+  double speed;
   color c;
   //ArrayList<int[]> visitedPatches = new ArrayList<int[]>();
   
@@ -11,7 +11,7 @@ public class Balloon {
     this.curX = (int) (curX * 50);
     this.curY = (int) (curY * 50);
     c = color(255,0,0);
-    speed = 2;
+    speed = 1;
   }
   
   void move(int x, int y){

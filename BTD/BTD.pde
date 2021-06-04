@@ -79,7 +79,7 @@ void detectBalloon() {
         if (isInRange(balloon, t)) {
           //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
           int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
-          Bullet b = new Bullet(t.damage, 5, t.range, t.x, t.y, direction); 
+          Bullet b = new Bullet(t.damage, 15, t.range, t.x, t.y, direction); 
           b.display();
           bullets.add(b);
           t.canShoot = false;
@@ -231,7 +231,7 @@ void keyPressed(){
   if (key == 32){
     //towers.clear(); 
     for (Tower t: towers){
-      Bullet b = new Bullet(t.damage, 5, t.range, t.x, t.y, 135); 
+      Bullet b = new Bullet(t.damage, 15, t.range, t.x, t.y, 135); 
       b.display();
       bullets.add(b);
     }
