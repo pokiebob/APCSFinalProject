@@ -43,3 +43,10 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Bullets now face and shoot in the correct direction (angle)
 - Towers shoot when they detect balloons
 - Note: Timer must be implemented so that there is an interval between each shot
+
+6/3: Group Call
+- Added timer so towers shoot every .45 seconds
+- Changed bullet shape to small circle + minor graphics changes
+- Towers shoot only one balloon at a time
+- Optimized balloon and tower/bullet speed to avoid towers missing balloons
+- Reminder: Fix unresolved issue from 5/31
