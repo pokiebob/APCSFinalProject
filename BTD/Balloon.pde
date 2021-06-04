@@ -11,7 +11,7 @@ public class Balloon {
     this.curX = (int) (curX * 50);
     this.curY = (int) (curY * 50);
     c = color(255,0,0);
-    speed = 5;
+    speed = 2;
   }
   
   void move(int x, int y){
@@ -25,8 +25,10 @@ public class Balloon {
   
   void display(){
     smooth();
+    stroke(0);
     fill(c);
     ellipse(curX, curY, 30, 40);
+    noStroke();
   }
   
 }

@@ -162,8 +162,6 @@ void dragTower() {
         Tower newDartMonkey = new Tower(20, 4);
         curTower = newDartMonkey;
         towerSelected = true;
-      } else {
-        strokeWeight(5);
       }
    } else {
      //System.out.println("tower not in range");

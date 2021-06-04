@@ -17,14 +17,16 @@ public class Bullet {
   }
   
   void display(){
-    fill(0,0,255);
-    rectMode(CENTER);
-    pushMatrix();
-    translate(curX, curY);
-    rotate(radians(direction));
-    rect(0, 0, 10, 20);
-    popMatrix();
-    rectMode(CORNER);
+    //fill(0,0,255);
+    //rectMode(CENTER);
+    //pushMatrix();
+    //translate(curX, curY);
+    //rotate(radians(direction));
+    //rect(0, 0, 10, 20);
+    //popMatrix();
+    //rectMode(CORNER);
+    fill(0, 0, 255);
+    ellipse(curX, curY, 15, 15);
   }
   
   void move(){
