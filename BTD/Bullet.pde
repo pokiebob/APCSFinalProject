@@ -6,6 +6,7 @@ public class Bullet {
   int curX;
   int curY;
   int direction;
+  boolean hitBalloon;
   
   Bullet(int damage, int speed, int range, int curX, int curY, int direction){
     this.damage = damage;
@@ -14,6 +15,7 @@ public class Bullet {
     this.curX = curX;
     this.curY = curY;
     this.direction = direction;
+    hitBalloon = false;
   }
   
   void display(){

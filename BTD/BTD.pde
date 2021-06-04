@@ -96,6 +96,17 @@ boolean isInRange(Balloon b, Tower t) {
 void moveBullets(){
   for (int i = 0; i < bullets.size(); i++){
     Bullet b = bullets.get(i);
+    int j = 0;
+    while (!b.hitBalloon && j < balloons.size()) {
+      Balloon balloon = balloons.get(j);
+      if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 20) {
+        b.hitBalloon = true;
+        bullets.remove(i);
+        balloons.remove(j);
+      }
+      j++;
+    }
+    
     if (b.range <= 0){
       bullets.remove(i); 
     }
