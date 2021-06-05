@@ -181,7 +181,12 @@ void dragTower() {
        curTower.drag();
        curTower.display();
        //Range
-       fill(255, 255, 255, 50);
+       if (isLegalTowerPlacement()) {
+         fill(255, 255, 255, 50);
+       } else {
+         fill(255, 0, 0, 50);
+       }
+
        ellipse(curTower.x, curTower.y,curTower.range * 2, curTower.range * 2); 
      } else {
        cursor(ARROW);
@@ -276,30 +281,50 @@ double[] locatePatch(int x, int y) {
 }
 
 boolean isLegalTowerPlacement() {
-  if (mouseX > 800 || bank < curTower.cost) {
+  if (mouseX > 775 || mouseX < 25 || mouseY < 25 || mouseY > 725 || bank < curTower.cost) {
     return false;
   }
   double[] patch;
   int value;
+  
+  //check if overlaps with path
+  patch = locatePatch(mouseX + 25, mouseY);
+  value = background[(int) patch[1]][(int) patch[0]];
+  if (value == 1) {
+    return false;
+  }
+  patch = locatePatch(mouseX - 25, mouseY);
+  value = background[(int) patch[1]][(int) patch[0]];
+  if (value == 1) {
+    return false;
+  }
+  patch = locatePatch(mouseX, mouseY + 25);
+  value = background[(int) patch[1]][(int) patch[0]];
+  if (value == 1 ) {
+    return false;
+  }
+  patch = locatePatch(mouseX, mouseY - 25);
+  value = background[(int) patch[1]][(int) patch[0]];
+  if (value == 1) {
+    return false;
+  }
+  
+  //check if overlaps with other towers
   for (Tower t : towers) {
     patch = locatePatch(mouseX + 25, mouseY);
-    value = background[(int) patch[1]][(int) patch[0]];
-    if (value == 1 || Arrays.equals(patch, locatePatch(t.x + 25, t.y))) {
+    if (Arrays.equals(patch, locatePatch(t.x + 25, t.y))) {
       return false;
     }
     patch = locatePatch(mouseX - 25, mouseY);
-    value = background[(int) patch[1]][(int) patch[0]];
-    if (value == 1 || Arrays.equals(patch, locatePatch(t.x -  25, t.y))) {
+    if (Arrays.equals(patch, locatePatch(t.x -  25, t.y))) {
       return false;
     }
     patch = locatePatch(mouseX, mouseY + 25);
-    value = background[(int) patch[1]][(int) patch[0]];
-    if (value == 1 || Arrays.equals(patch, locatePatch(t.x, t.y + 25))) {
+    if (Arrays.equals(patch, locatePatch(t.x, t.y + 25))) {
       return false;
     }
     patch = locatePatch(mouseX, mouseY - 25);
-    value = background[(int) patch[1]][(int) patch[0]];
-    if (value == 1 || Arrays.equals(patch, locatePatch(t.x, t.y - 25))) {
+    if (Arrays.equals(patch, locatePatch(t.x, t.y - 25))) {
       return false;
     }
   }
