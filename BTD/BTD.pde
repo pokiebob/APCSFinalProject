@@ -13,7 +13,7 @@ int ticks = 1000;
 int lives = 150;
 int level = 1;
 int round = 1;
-//int time = 0;
+Timer time;
 
 ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Balloon> balloons = new ArrayList<Balloon>();
@@ -29,17 +29,18 @@ void setup(){
   size(1200,750);
   //setBackground(); 
   start.display();
+  time = new Timer(0);
 }
 
 void draw(){
  
   if (hasStarted){ 
-    
     //time = millis() * 1000;
     //print(time + "\n");
     setBackground();
     lifeBar();
     displayStats();
+    
     Tower dartMonkey = new Tower(20, 6);
     dartMonkey.display();
     
@@ -60,7 +61,7 @@ void draw(){
 }
 
 void spawnBalloon() {
-  for (int i = 5000; i >= 0; i-=100){
+  for (int i = 999; i >= 0; i-=100){
     if ( (i/100 % 2 == 0) && ticks >= i && ticks <= i + 100){
       if(ticks % 10 == 0) makeBalloon();
     }
@@ -110,6 +111,9 @@ void displayStats(){
   text("Round: " + round, 1000, 50); 
   text("Bank: " + bank, 1000, 100); 
   text("Income: " + income, 1000, 150); 
+  time.countUp();
+  text("Timer (int): " + (int) time.getTime(), 1000, 500);
+  //text("Timer (float): " + time.getTime(), 1000, 600);
   textAlign(LEFT);
 }
 
