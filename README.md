@@ -7,7 +7,7 @@ https://docs.google.com/document/d/1tSAFTTgo5l4CAf2x9fFHQCuG0fYmOD8H5YnAuef8rGo/
 - Hasin Raihan
 
 ## Description
-A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiwi. The goal is to build and upgrade your towers while the computer sends balloons at you. As each round passes, you receive money based on your interest rate, which you can use to buy newly unlocked towers to defend against increasingly stronger balloons. Each balloon and tower has its own special feature and cost. 
+A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiwi. The goal is to build and upgrade your towers while the computer sends balloons at you. As each round passes, you receive money based on your interest rate, which you can use to buy newly unlocked towers to defend against increasingly stronger balloons. Each balloon and tower has its own special feature and cost.
 
 ## Development Log
 
@@ -16,10 +16,10 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Created basic path.
 
 5/26: Cyrus
-- Moved tower menu to the right of the screen. 
+- Moved tower menu to the right of the screen.
 - Added ellipse for dartmonkey in menu, with drag and drop functionality.
 - Note: Path checker is slightly innacurate, it allows for towers to partially cover the path.
- 
+
 5/27: Group Call during free
 - Created balloon class with basic speed variable and move and display methods
 - Balloons follow the general path, however there is a slight offset due to patches
@@ -58,3 +58,5 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Created a basic title screen with a start button using a Button class
 - Resolved the tower placement issue from 5/31
 - Tower range turns red if it is an illegal placement
+- Used a for loop to automate spawning balloons (resembles a real level more)
+- Fixed a plethora of array out of bounds exception 
