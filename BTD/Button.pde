@@ -17,14 +17,16 @@ public class Button {
   void display() {
     fill(218);
     stroke(141);
+    rectMode(CENTER);
     rect(x, y, w, h, 10);
-    textAlign(CENTER, CENTER);
+    rectMode(CORNER);
+    textAlign(CENTER);
     fill(0);
-    text(label, x + (w / 2), y + (h / 2));
+    text(label, x, y);
   }
   
   boolean mouseIsOver() {
-    if (mouseX > x && mouseX < (x + w) && mouseY > y && mouseY < (y + h)) {
+    if (mouseX > (x - w/2) && mouseX < (x + w/2) && mouseY > (y - h/2) && mouseY < (y + h/2)) {
       return true;
     }
     return false;
