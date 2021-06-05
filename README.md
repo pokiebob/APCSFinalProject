@@ -50,3 +50,11 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Towers shoot only one balloon at a time
 - Optimized balloon and tower/bullet speed to avoid towers missing balloons
 - Reminder: Fix unresolved issue from 5/31
+
+6/4: Group Call
+- Implemented a money system in which towers reduce balance when placed
+- Balance cannot go below 0
+- Currently, balloons popped increase balance, but in the future they will increase income
+- Created a basic title screen with a start button using a Button class
+- Resolved the tower placement issue from 5/31
+- Tower range turns red if it is an illegal placement

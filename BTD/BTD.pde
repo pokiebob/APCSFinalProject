@@ -14,6 +14,8 @@ ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 int[][] background = pumpkinPatch();
 int ticks = 0;
 int lives = 150;
+int level = 1;
+int round = 1;
 
 boolean hasStarted = false;
 boolean towerSelected = false;
@@ -80,7 +82,7 @@ void draw(){
 void displayStats(){
   textSize(32);
   textAlign(CENTER);
-  text("Round: " + 1, 1000, 50); 
+  text("Round: " + round, 1000, 50); 
   text("Bank: " + bank, 1000, 100); 
   text("Income: " + income, 1000, 150); 
   textAlign(LEFT);
