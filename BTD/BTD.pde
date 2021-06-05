@@ -3,30 +3,80 @@ import java.util.Arrays;
      
 //title screen 
      
+int[][] background = pumpkinPatch();
+
 int colPatch = 16;
 int rowPatch = 15;
 int bank = 650; 
 int income = 100; 
-//int time = 0;
-ArrayList<Tower> towers = new ArrayList<Tower>();
-ArrayList<Balloon> balloons = new ArrayList<Balloon>();
-ArrayList<Bullet> bullets = new ArrayList<Bullet>(); 
-int[][] background = pumpkinPatch();
-int ticks = 0;
+int ticks = 1000;
 int lives = 150;
 int level = 1;
 int round = 1;
+//int time = 0;
+
+ArrayList<Tower> towers = new ArrayList<Tower>();
+ArrayList<Balloon> balloons = new ArrayList<Balloon>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>(); 
 
 boolean hasStarted = false;
 boolean towerSelected = false;
+
 Tower curTower;
 Button start = new Button("Start", 600, 375, 100, 50);
-
 
 void setup(){
   size(1200,750);
   //setBackground(); 
   start.display();
+}
+
+void draw(){
+ 
+  if (hasStarted){ 
+    
+    //time = millis() * 1000;
+    //print(time + "\n");
+    setBackground();
+    lifeBar();
+    displayStats();
+    Tower dartMonkey = new Tower(20, 6);
+    dartMonkey.display();
+    
+    spawnBalloon();
+    moveBalloons();
+    moveBullets();
+    detectBalloon();
+    reloadTowers();
+    
+    for (Tower t : towers) {
+      t.display();
+    }
+    
+    dragTower();
+    
+    ticks--;
+  }
+}
+
+void spawnBalloon() {
+  for (int i = 5000; i >= 0; i-=100){
+    if ( (i/100 % 2 == 0) && ticks >= i && ticks <= i + 100){
+      if(ticks % 10 == 0) makeBalloon();
+    }
+  }
+  
+  //if (ticks >= 4900) {
+  //   if (ticks % 10 == 0) {
+  //     makeBalloon();
+  //   }
+  //}
+  //if (ticks <= 4800 && ticks >= 4700) {
+  //  if (ticks % 10 == 0) {
+  //    makeBalloon();
+  //  }
+  //}
+  
 }
 
 void setBackground() {
@@ -51,31 +101,6 @@ void mousePressed(){
     if (start.mouseIsOver()){
       hasStarted = true; 
     }
-  }
-}
-
-void draw(){
- 
-  if (hasStarted){ 
-    setBackground();
-    lifeBar();
-    displayStats();
-    Tower dartMonkey = new Tower(20, 6);
-    dartMonkey.display();
-    
-    spawnBalloon();
-    moveBalloons();
-    moveBullets();
-    detectBalloon();
-    reloadTowers();
-    
-    for (Tower t : towers) {
-      t.display();
-    }
-    
-    dragTower();
-    
-    ticks++;
   }
 }
 
@@ -138,7 +163,7 @@ void moveBullets(){
       j++;
     }
     
-    if (b.range <= 0){
+    if (bullets.size() > 0 && b.range <= 0){
       bullets.remove(i); 
     }
     else {
@@ -158,20 +183,6 @@ void lifeBar() {
   fill(0);
   textSize(20);
   text("" + lives, 12.5, 20);
-}
-
-void spawnBalloon() {
-  if (ticks <= 100) {
-     if (ticks % 10 == 0) {
-       makeBalloon();
-     }
-  }
-  if (ticks >= 200 && ticks <= 300) {
-    if (ticks % 10 == 0) {
-      makeBalloon();
-    }
-  }
-  
 }
 
 void dragTower() {
@@ -290,45 +301,51 @@ boolean isLegalTowerPlacement() {
   int value;
   
   //check if overlaps with path
-  patch = locatePatch(mouseX + 25, mouseY);
-  value = background[(int) patch[1]][(int) patch[0]];
-  if (value == 1) {
-    return false;
-  }
-  patch = locatePatch(mouseX - 25, mouseY);
-  value = background[(int) patch[1]][(int) patch[0]];
-  if (value == 1) {
-    return false;
-  }
-  patch = locatePatch(mouseX, mouseY + 25);
-  value = background[(int) patch[1]][(int) patch[0]];
-  if (value == 1 ) {
-    return false;
-  }
-  patch = locatePatch(mouseX, mouseY - 25);
-  value = background[(int) patch[1]][(int) patch[0]];
-  if (value == 1) {
-    return false;
-  }
-  
-  //check if overlaps with other towers
-  for (Tower t : towers) {
+  try {
     patch = locatePatch(mouseX + 25, mouseY);
-    if (Arrays.equals(patch, locatePatch(t.x + 25, t.y))) {
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1) {
       return false;
     }
     patch = locatePatch(mouseX - 25, mouseY);
-    if (Arrays.equals(patch, locatePatch(t.x -  25, t.y))) {
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1) {
       return false;
     }
     patch = locatePatch(mouseX, mouseY + 25);
-    if (Arrays.equals(patch, locatePatch(t.x, t.y + 25))) {
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1 ) {
       return false;
     }
     patch = locatePatch(mouseX, mouseY - 25);
-    if (Arrays.equals(patch, locatePatch(t.x, t.y - 25))) {
+    value = background[(int) patch[1]][(int) patch[0]];
+    if (value == 1) {
       return false;
     }
+  
+    //check if overlaps with other towers
+    for (Tower t : towers) {
+      patch = locatePatch(mouseX + 25, mouseY);
+      if (Arrays.equals(patch, locatePatch(t.x + 25, t.y))) {
+        return false;
+      }
+      patch = locatePatch(mouseX - 25, mouseY);
+      if (Arrays.equals(patch, locatePatch(t.x -  25, t.y))) {
+        return false;
+      }
+      patch = locatePatch(mouseX, mouseY + 25);
+      if (Arrays.equals(patch, locatePatch(t.x, t.y + 25))) {
+        return false;
+      }
+      patch = locatePatch(mouseX, mouseY - 25);
+      if (Arrays.equals(patch, locatePatch(t.x, t.y - 25))) {
+        return false;
+      }
+    }
+  }
+  catch (ArrayIndexOutOfBoundsException e){
+    print("hi");
+    return false;
   }
   return true;
 }
