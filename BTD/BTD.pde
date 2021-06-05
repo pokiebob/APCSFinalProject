@@ -1,6 +1,8 @@
 //Balloon Tower Defense
 import java.util.Arrays;
      
+//title screen 
+     
 int colPatch = 16;
 int rowPatch = 15;
 int bank = 650; 
@@ -13,12 +15,16 @@ int[][] background = pumpkinPatch();
 int ticks = 0;
 int lives = 150;
 
+boolean hasStarted = false;
 boolean towerSelected = false;
 Tower curTower;
+Button start = new Button("Start", 600, 375, 100, 50);
+
 
 void setup(){
   size(1200,750);
-  setBackground(); 
+  //setBackground(); 
+  start.display();
 }
 
 void setBackground() {
@@ -38,28 +44,37 @@ void setBackground() {
   }
 }
 
-void draw(){
-
-  setBackground();
-  lifeBar();
-  displayStats();
-  Tower dartMonkey = new Tower(20, 6);
-  dartMonkey.display();
-  
-  spawnBalloon();
-  moveBalloons();
-  moveBullets();
-  detectBalloon();
-  reloadTowers();
-  
-  for (Tower t : towers) {
-    t.display();
+void mousePressed(){
+  if (!hasStarted) {
+    if (start.mouseIsOver()){
+      hasStarted = true; 
+    }
   }
-  
-  dragTower();
-  
-  ticks++;
+}
+
+void draw(){
  
+  if (hasStarted){ 
+    setBackground();
+    lifeBar();
+    displayStats();
+    Tower dartMonkey = new Tower(20, 6);
+    dartMonkey.display();
+    
+    spawnBalloon();
+    moveBalloons();
+    moveBullets();
+    detectBalloon();
+    reloadTowers();
+    
+    for (Tower t : towers) {
+      t.display();
+    }
+    
+    dragTower();
+    
+    ticks++;
+  }
 }
 
 void displayStats(){
@@ -115,6 +130,8 @@ void moveBullets(){
         b.hitBalloon = true;
         bullets.remove(i);
         balloons.remove(j);
+        //Remove later
+        bank += 20;
       }
       j++;
     }
@@ -158,7 +175,7 @@ void spawnBalloon() {
 void dragTower() {
   if (towerSelected) {
      //System.out.println("towerSelected");
-     if (mousePressed) {
+     if (mousePressed && (mouseButton == LEFT)) {
        //System.out.print(" and mouse pressed \n");
        cursor(HAND);
        curTower.drag();
