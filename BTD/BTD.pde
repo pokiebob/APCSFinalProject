@@ -38,8 +38,6 @@ void draw(){
     //time = millis() * 1000;
     //print(time + "\n");
     setBackground();
-    lifeBar();
-    displayStats();
     //if (lives == 50){
     //  print(time.getTime() + "\n"); 
     //}
@@ -61,6 +59,9 @@ void draw(){
     }
     
     dragTower();
+    
+    lifeBar();
+    displayStats();
     
     if (time.getTime() <= 0){
        //Display win message 
