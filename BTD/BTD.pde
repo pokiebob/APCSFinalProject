@@ -40,6 +40,10 @@ void draw(){
     setBackground();
     lifeBar();
     displayStats();
+    if (lives == 50){
+      print(time.getTime() + "\n"); 
+ 
+    }
     
     Tower dartMonkey = new Tower(20, 6);
     dartMonkey.display();
@@ -67,6 +71,7 @@ void spawnBalloon() {
     }
   }
   
+  //Old spawn balloon
   //if (ticks >= 4900) {
   //   if (ticks % 10 == 0) {
   //     makeBalloon();
@@ -160,7 +165,8 @@ void moveBullets(){
       if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 20) {
         b.hitBalloon = true;
         bullets.remove(i);
-        balloons.remove(j);
+        balloon.decreaseHealth(b.damage);
+        if (balloon.health == 0) balloons.remove(j);
         //Remove later
         bank += 20;
       }
@@ -234,12 +240,11 @@ void dragTower() {
 }
 
 void makeBalloon(){
-  Balloon bloon = new Balloon(1, 15.5, 1.5);
+  Balloon bloon = new Balloon(2, 15.5, 1.5);
   balloons.add(bloon);  
 }
 
 void moveBalloons(){
-  //
   for (int i = 0; i < balloons.size(); i++) {   
     Balloon b = balloons.get(i);
      b.display();
@@ -273,7 +278,6 @@ void moveBalloons(){
        lives -= b.health;
        balloons.remove(i);
      }
-     
   }
   
 }

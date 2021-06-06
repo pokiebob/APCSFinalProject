@@ -10,8 +10,14 @@ public class Balloon {
     this.health = health;
     this.curX = (int) (curX * 50);
     this.curY = (int) (curY * 50);
-    c = color(255,0,0);
-    speed = 1;
+    if (health==1){
+      c = color(255,0,0);
+    }
+    else if (health==2){
+      c = color(0,0,255); 
+    }
+    //c = color(0,0,255);
+    speed = 2;
   }
   
   void move(int x, int y){
@@ -22,6 +28,10 @@ public class Balloon {
   //void patchVisited(int[] arr) {
   //  visitedPatches.add(arr);
   //}
+  
+  void decreaseHealth(int towerDamage){
+     health -= towerDamage;
+  }
   
   void display(){
     smooth();
