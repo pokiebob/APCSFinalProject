@@ -47,6 +47,9 @@ void draw(){
     Tower dartMonkey = new Tower(20, 6);
     dartMonkey.display();
     
+    Tower sniperMonkey = new Sniper(20, 8);
+    sniperMonkey.display();
+    
     spawnBalloon();
     moveBalloons();
     moveBullets();
@@ -89,7 +92,7 @@ void spawnBalloon() {
     }
     
     else if (round == 3) {
-      if (ticks < 350){
+      if (ticks < 300){
         if(ticks >= 250) {
           if(ticks % 10 == 0) makeBalloon(2);
         } else {
@@ -132,6 +135,7 @@ void spawnBalloon() {
     }
   
   }
+  
   //if (round == 1) {
   //  for (int i = 199; i >= 0; i-=100){
   //    if ( (i/100 % 2 == 0) && ticks >= i && ticks <= i + 100){
@@ -308,6 +312,7 @@ void dragTower() {
          //System.out.println("legal tower placement");
          towers.add(curTower);
          bank -= curTower.cost;
+         income -= (int) (curTower.cost * 0.07);
        }
        //System.out.println(locatePatch()[0] + " " + locatePatch()[1]);
      }
