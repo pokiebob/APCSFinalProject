@@ -59,4 +59,8 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Resolved the tower placement issue from 5/31
 - Tower range turns red if it is an illegal placement
 - Used a for loop to automate spawning balloons (resembles a real level more)
-- Fixed a plethora of array out of bounds exception 
+- Fixed a plethora of array out of bounds exception
+
+6/5: Hasin
+- Implemented a timer class (which will be used to show time elapsed/time left in a given round/wave)
+- Started working on implementing different balloon types (currently red & blue)
