@@ -233,7 +233,7 @@ void detectBalloon() {
         if (isInRange(balloon, t)) {
           //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
           int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
-          Bullet b = new Bullet(t.damage, 15, t.range, t.x, t.y, direction); 
+          Bullet b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
           b.display();
           bullets.add(b);
           t.canShoot = false;
@@ -256,10 +256,14 @@ void moveBullets(){
       if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 20) {
         b.hitBalloon = true;
         bullets.remove(i);
+        int initial = balloon.health;
         balloon.decreaseHealth(b.damage);
-        income++;
-        if (balloon.health == 0) {
+        if (balloon.health <= 0) {
+          income += initial;
           balloons.remove(j);
+        }
+        else {
+          income += b.damage;
         }
       }
       j++;
@@ -325,7 +329,17 @@ void dragTower() {
         curTower = newDartMonkey;
         towerSelected = true;
       }
-   } else {
+   }
+   else if (dist(1000, 400, mouseX, mouseY) < 25) {
+      //System.out.println("tower not selected");
+      cursor(HAND);
+      if (mousePressed) {
+        Tower newSniperMonkey = new Sniper(20, 8);
+        curTower = newSniperMonkey;
+        towerSelected = true;
+      }
+   }
+   else {
      //System.out.println("tower not in range");
      cursor(ARROW);
      noStroke();
@@ -375,16 +389,11 @@ void moveBalloons(){
   
 }
 
-//void keyPressed(){
-//  if (key == 32){
-//    //towers.clear(); 
-//    for (Tower t: towers){
-//      Bullet b = new Bullet(t.damage, 15, t.range, t.x, t.y, 135); 
-//      b.display();
-//      bullets.add(b);
-//    }
-//  }
-//}
+void keyPressed(){
+  if (key == 32){
+    makeBalloon(2);
+  }
+}
 
 int[] locatePatch() {
   return new int[] { (int) mouseX / 50, (int) mouseY / 50 };

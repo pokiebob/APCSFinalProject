@@ -3,6 +3,7 @@ public class Tower {
   int cost;
   int damage;
   int range;
+  int bulletVelocity;
   double speed;
   double timer;
   color c;
@@ -15,6 +16,7 @@ public class Tower {
     range = 175;
     speed = 0.9;
     timer = speed;
+    bulletVelocity = 15;
     c = color(175, 100, 0);
     this.x = x * 50;
     this.y = y * 50;
