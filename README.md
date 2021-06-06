@@ -64,3 +64,10 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 6/5: Hasin
 - Implemented a timer class (which will be used to show time elapsed/time left in a given round/wave)
 - Started working on implementing different balloon types (currently red & blue)
+
+6/6: Cyrus
+- Programmed 6 rounds of balloon waves
+- Created red blue and green balloon types that change color based on current health
+- Created Sniper subclass and added it to menu
+- Switched to income based profit based on damage dealt to balloons
+- Balanced dart and sniper tower speeds as well as balloon speeds
