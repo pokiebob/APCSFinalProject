@@ -67,7 +67,7 @@ void draw(){
 void spawnBalloon() {
   for (int i = 999; i >= 0; i-=100){
     if ( (i/100 % 2 == 0) && ticks >= i && ticks <= i + 100){
-      if(ticks % 10 == 0) makeBalloon();
+      if(ticks % 10 == 0) makeGreenBalloon();
     }
   }
   
@@ -166,9 +166,11 @@ void moveBullets(){
         b.hitBalloon = true;
         bullets.remove(i);
         balloon.decreaseHealth(b.damage);
-        if (balloon.health == 0) balloons.remove(j);
-        //Remove later
-        bank += 20;
+        if (balloon.health == 0) {
+          balloons.remove(j);
+          //Remove later
+          bank += 10;
+        }
       }
       j++;
     }
@@ -239,8 +241,18 @@ void dragTower() {
    } 
 }
 
-void makeBalloon(){
+void makeRedBalloon(){
+  Balloon bloon = new Balloon(1, 15.5, 1.5);
+  balloons.add(bloon);  
+}
+
+void makeBlueBalloon(){
   Balloon bloon = new Balloon(2, 15.5, 1.5);
+  balloons.add(bloon);  
+}
+
+void makeGreenBalloon(){
+  Balloon bloon = new Balloon(3, 15.5, 1.5);
   balloons.add(bloon);  
 }
 
