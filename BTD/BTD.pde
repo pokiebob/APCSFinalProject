@@ -9,11 +9,10 @@ int colPatch = 16;
 int rowPatch = 15;
 int bank = 650; 
 int income = 100; 
-int ticks = 1000;
+int ticks = 0;
 int lives = 150;
 int level = 1;
-int round = 1;
-Timer time;
+int round = 0;
 
 ArrayList<Tower> towers = new ArrayList<Tower>();
 ArrayList<Balloon> balloons = new ArrayList<Balloon>();
@@ -23,13 +22,14 @@ boolean hasStarted = false;
 boolean towerSelected = false;
 
 Tower curTower;
+Timer time;
 Button start = new Button("Start", 600, 375, 100, 50);
 
 void setup(){
   size(1200,750);
   //setBackground(); 
   start.display();
-  time = new Timer(0);
+  time = new Timer(120);
 }
 
 void draw(){
@@ -40,10 +40,9 @@ void draw(){
     setBackground();
     lifeBar();
     displayStats();
-    if (lives == 50){
-      print(time.getTime() + "\n"); 
- 
-    }
+    //if (lives == 50){
+    //  print(time.getTime() + "\n"); 
+    //}
     
     Tower dartMonkey = new Tower(20, 6);
     dartMonkey.display();
@@ -60,30 +59,119 @@ void draw(){
     
     dragTower();
     
+    if (time.getTime() <= 0){
+       //Display win message 
+    }
+    
+    time.countDown();
+    
+    if (ticks <= 0 && balloons.size()==0){
+      round++;
+      setTicks();
+    }
     ticks--;
   }
 }
 
 void spawnBalloon() {
-  for (int i = 999; i >= 0; i-=100){
-    if ( (i/100 % 2 == 0) && ticks >= i && ticks <= i + 100){
-      if(ticks % 10 == 0) makeGreenBalloon();
+  if (ticks >= 0) {
+    
+    if (round == 1) {
+      if (ticks < 200) {
+        if(ticks % 10 == 0) makeBalloon(1);
+      }
     }
-  }
+    
+    else if (round == 2) {
+      if (ticks < 350) {
+        if(ticks % 10 == 0) makeBalloon(1);
+      }
+    }
+    
+    else if (round == 3) {
+      if (ticks < 350){
+        if(ticks >= 250) {
+          if(ticks % 10 == 0) makeBalloon(2);
+        } else {
+          if (ticks % 10 == 0) makeBalloon(1);
+        }
+      }
+    }
+    
+    else if (round == 4) {
+      if (ticks < 530){ 
+        if(ticks > 180) {
+          if(ticks % 10 == 0) makeBalloon(2);
+        } else {
+          if (ticks % 10 == 0) makeBalloon(1);
+        }
+      }
+    }
+    
+    else if (round == 5) {
+      if (ticks < 320){ 
+        if(ticks > 270) {
+          if(ticks % 10 == 0) makeBalloon(2);
+        } else {
+          if (ticks % 10 == 0) makeBalloon(1);
+        }
+      }
+    }
+    
+    else if (round == 6) {
+      if (ticks < 340){
+       if(ticks < 150) {
+         if(ticks % 10 == 0) makeBalloon(2);
+        } else if (ticks < 190) {
+          if (ticks % 10 == 0) makeBalloon(3);
+        }
+        else {
+          if (ticks % 10 == 0) makeBalloon(1);
+        }
+      }
+    }
   
-  //Old spawn balloon
-  //if (ticks >= 4900) {
-  //   if (ticks % 10 == 0) {
-  //     makeBalloon();
-  //   }
-  //}
-  //if (ticks <= 4800 && ticks >= 4700) {
-  //  if (ticks % 10 == 0) {
-  //    makeBalloon();
+  }
+  //if (round == 1) {
+  //  for (int i = 199; i >= 0; i-=100){
+  //    if ( (i/100 % 2 == 0) && ticks >= i && ticks <= i + 100){
+  //      if(ticks % 10 == 0) makeBalloon(3);
+  //    }
   //  }
   //}
   
 }
+
+void setTicks(){
+  if (round == 1) {
+    ticks = 200;
+  }
+  else if (round == 2){
+    ticks = 350;
+  }
+  else if (round == 3){
+    ticks = 300;
+  }
+  else if (round == 4){
+    ticks = 530;
+  }
+  else if (round == 5){
+    ticks = 320;
+  }
+  else if (round == 6){
+    ticks = 340;
+  }
+  ticks += 200;
+}
+
+/*
+round 1 = 20 red
+round 2 = 35 red
+round 3 = 25 red, 5 blue
+round 4 = 35 red, 18 blue
+round 5 = 5 red, 27 blue 
+round 6 = 15 red, 4 green, 15 blue 
+*/
 
 void setBackground() {
   background(200);
@@ -116,9 +204,7 @@ void displayStats(){
   text("Round: " + round, 1000, 50); 
   text("Bank: " + bank, 1000, 100); 
   text("Income: " + income, 1000, 150); 
-  time.countUp();
   text("Timer (int): " + (int) time.getTime(), 1000, 500);
-  //text("Timer (float): " + time.getTime(), 1000, 600);
   textAlign(LEFT);
 }
 
@@ -241,18 +327,8 @@ void dragTower() {
    } 
 }
 
-void makeRedBalloon(){
-  Balloon bloon = new Balloon(1, 15.5, 1.5);
-  balloons.add(bloon);  
-}
-
-void makeBlueBalloon(){
-  Balloon bloon = new Balloon(2, 15.5, 1.5);
-  balloons.add(bloon);  
-}
-
-void makeGreenBalloon(){
-  Balloon bloon = new Balloon(3, 15.5, 1.5);
+void makeBalloon(int h){
+  Balloon bloon = new Balloon(h, 15.5, 1.5);
   balloons.add(bloon);  
 }
 

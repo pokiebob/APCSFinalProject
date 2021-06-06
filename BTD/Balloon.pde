@@ -10,19 +10,6 @@ public class Balloon {
     this.health = health;
     this.curX = (int) (curX * 50);
     this.curY = (int) (curY * 50);
-    if (health==1){
-      c = color(255,0,0);
-      speed = 1;
-    }
-    else if (health==2){
-      c = color(0,0,255); 
-      speed = 1.4;
-    }
-    else if (health==3){
-      c = color(0,255,0); 
-      speed = 1.8;
-    }
-    //c = color(0,0,255);
   }
   
   void move(int x, int y){
@@ -39,6 +26,21 @@ public class Balloon {
   }
   
   void display(){
+    //Red
+    if (health==1){
+      c = color(255,0,0);
+      speed = 1;
+    }
+    //Blue
+    else if (health==2){
+      c = color(0,0,255); 
+      speed = 2;
+    }
+    //Green
+    else if (health==3){
+      c = color(0,255,0); 
+      speed = 2;
+    }
     smooth();
     stroke(0);
     fill(c);
