@@ -162,6 +162,7 @@ void setTicks(){
     ticks = 340;
   }
   ticks += 200;
+  if (round > 1) bank += income;
 }
 
 /*
@@ -252,10 +253,9 @@ void moveBullets(){
         b.hitBalloon = true;
         bullets.remove(i);
         balloon.decreaseHealth(b.damage);
+        income++;
         if (balloon.health == 0) {
           balloons.remove(j);
-          //Remove later
-          bank += 10;
         }
       }
       j++;
