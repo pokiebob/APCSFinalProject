@@ -307,7 +307,9 @@ void selectTower() {
     }
   }
   else {
-    if (mousePressed && mouseX < 800) {
+    fill(255, 255, 255, 50);
+    ellipse(selectedTower.x, selectedTower.y, selectedTower.range * 2, selectedTower.range * 2);
+    if (mousePressed && mouseX < 800 && ! (dist(selectedTower.x, selectedTower.y, mouseX, mouseY) < 25)) {
       selectingTower = false;
     }
   }
