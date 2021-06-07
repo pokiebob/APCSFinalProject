@@ -64,6 +64,7 @@ void draw(){
     selectTower();
     lifeBar();
     displayStats();
+    displayTowerStats();
     
     if (time.getTime() <= 0){
        //Display win message 
@@ -181,28 +182,22 @@ round 5 = 5 red, 27 blue
 round 6 = 15 red, 4 green, 15 blue 
 */
 
-void setBackground() {
-  background(200);
-  /* Creates 15 x 16 (grid) */
-  for(int i = 0; i < rowPatch; i++){
-    for(int j = 0; j < colPatch; j++){
-      if (background[i][j]==1){
-        fill(255);
-        rect(j*50,i*50,50,50);
-      }
-      else{
-        fill(0);
-        rect(j*50,i*50,50,50);
-      }
-    }
-  }
-}
-
-void mousePressed(){
-  if (!hasStarted) {
-    if (start.mouseIsOver()){
-      hasStarted = true; 
-    }
+void displayTowerStats() {
+  if (selectingTower) {
+    stroke(0);
+    fill(255);
+    rect(850, 400, 300, 300);
+    
+    fill(0);
+    textSize(20);
+    textAlign(CENTER);
+    text(selectedTower.name, 1000, 450);
+    
+    textAlign(CORNER);
+    textSize(15);
+    text("Cost: " + selectedTower.cost, 900, 625);
+    text("Damage: " + selectedTower.damage, 900, 650);
+    text("Range: " + selectedTower.range, 900, 675);
   }
 }
 
@@ -215,6 +210,31 @@ void displayStats(){
   text("Income: " + income, 1000, 125); 
   text("Time Elapsed: " + (int) time.getTime(), 1000, 150);
   textAlign(LEFT);
+}
+
+void setBackground() {
+  background(200);
+  /* Creates 15 x 16 (grid) */
+  for(int i = 0; i < rowPatch; i++){
+    for(int j = 0; j < colPatch; j++){
+      if (background[i][j]==1){
+        fill(215,140,65);
+        rect(j*50,i*50,50,50);
+      }
+      else{
+        fill(170,80,40);
+        rect(j*50,i*50,50,50);
+      }
+    }
+  }
+}
+
+void mousePressed(){
+  if (!hasStarted) {
+    if (start.mouseIsOver()){
+      hasStarted = true; 
+    }
+  }
 }
 
 void reloadTowers() {
@@ -257,7 +277,7 @@ void moveBullets(){
     int j = 0;
     while (!b.hitBalloon && j < balloons.size()) {
       Balloon balloon = balloons.get(j);
-      if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 20) {
+      if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 25) {
         b.hitBalloon = true;
         bullets.remove(i);
         int initial = balloon.health;

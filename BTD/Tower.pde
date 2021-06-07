@@ -9,6 +9,7 @@ public class Tower {
   color c;
   int x, y;
   boolean canShoot;
+  String name;
   
   Tower(int x, int y) {
     cost = 200;
@@ -21,6 +22,7 @@ public class Tower {
     this.x = x * 50;
     this.y = y * 50;
     canShoot = true;
+    name = "Dart Monkey";
   }
   
   void drag() {
@@ -30,9 +32,11 @@ public class Tower {
   
   void display() {
     //noStroke();
+    stroke(0);
     smooth();
     fill(c);
     ellipse(x, y, 50, 50);
+    noStroke();
   }
 
   
