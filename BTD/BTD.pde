@@ -19,9 +19,10 @@ ArrayList<Balloon> balloons = new ArrayList<Balloon>();
 ArrayList<Bullet> bullets = new ArrayList<Bullet>(); 
 
 boolean hasStarted = false;
-boolean towerSelected = false;
+boolean draggingTower = false;
+boolean selectingTower = false;
 
-Tower curTower;
+Tower curTower, selectedTower;
 Timer time;
 Button start = new Button("Start", 600, 375, 100, 50);
 
@@ -29,12 +30,13 @@ void setup(){
   size(1200,750);
   //setBackground(); 
   start.display();
-  time = new Timer(120);
+  time = new Timer(0);
 }
 
 void draw(){
  
   if (hasStarted){ 
+    noStroke();
     //time = millis() * 1000;
     //print(time + "\n");
     setBackground();
@@ -59,7 +61,7 @@ void draw(){
     }
     
     dragTower();
-    
+    selectTower();
     lifeBar();
     displayStats();
     
@@ -67,7 +69,7 @@ void draw(){
        //Display win message 
     }
     
-    time.countDown();
+    time.countUp();
     
     if (ticks <= 0 && balloons.size()==0){
       round++;
@@ -210,7 +212,7 @@ void displayStats(){
   text("Round: " + round, 1000, 50); 
   text("Bank: " + bank, 1000, 100); 
   text("Income: " + income, 1000, 150); 
-  text("Timer (int): " + (int) time.getTime(), 1000, 500);
+  text("Time Elapsed: " + (int) time.getTime(), 1000, 500);
   textAlign(LEFT);
 }
 
@@ -292,12 +294,30 @@ void lifeBar() {
   text("" + lives, 12.5, 20);
 }
 
+void selectTower() {
+  if (!selectingTower) {
+    for (Tower t : towers) {
+      //if user clicks on a tower
+      if (dist(t.x, t.y, mouseX, mouseY) < 25) {
+        if (mousePressed) {
+          selectingTower = true;
+          selectedTower = t;
+        }
+      }
+    }
+  }
+  else {
+    if (mousePressed && mouseX < 800) {
+      selectingTower = false;
+    }
+  }
+}
+
 void dragTower() {
-  if (towerSelected) {
-     //System.out.println("towerSelected");
+  if (draggingTower) {
      if (mousePressed && (mouseButton == LEFT)) {
-       //System.out.print(" and mouse pressed \n");
-       cursor(HAND);
+       //currently dragging tower
+       selectingTower = false;
        curTower.drag();
        curTower.display();
        //Range
@@ -309,9 +329,8 @@ void dragTower() {
 
        ellipse(curTower.x, curTower.y,curTower.range * 2, curTower.range * 2); 
      } else {
-       cursor(ARROW);
-       towerSelected = false;
-       
+       //you let go of tower
+       draggingTower = false;
        //if legal tower placement
        if (isLegalTowerPlacement()) {
          //System.out.println("legal tower placement");
@@ -319,32 +338,29 @@ void dragTower() {
          bank -= curTower.cost;
          income -= (int) (curTower.cost * 0.07);
        }
+       curTower = null;
        //System.out.println(locatePatch()[0] + " " + locatePatch()[1]);
      }
    }
-   else if (dist(1000, 300, mouseX, mouseY) < 25) {
-      //System.out.println("tower not selected");
-      cursor(HAND);
-      if (mousePressed) {
-        Tower newDartMonkey = new Tower(20, 6);
-        curTower = newDartMonkey;
-        towerSelected = true;
-      }
+   else if (!selectingTower) {
+     if (dist(1000, 300, mouseX, mouseY) < 25) {
+        //System.out.println("tower not selected");
+        if (mousePressed) {
+          Tower newDartMonkey = new Tower(20, 6);
+          curTower = newDartMonkey;
+          draggingTower = true;
+        }
+     }
+     else if (dist(1000, 400, mouseX, mouseY) < 25) {
+        //System.out.println("tower not selected");
+        if (mousePressed) {
+          Tower newSniperMonkey = new Sniper(20, 8);
+          curTower = newSniperMonkey;
+          draggingTower = true;
+        }
+     }
    }
-   else if (dist(1000, 400, mouseX, mouseY) < 25) {
-      //System.out.println("tower not selected");
-      cursor(HAND);
-      if (mousePressed) {
-        Tower newSniperMonkey = new Sniper(20, 8);
-        curTower = newSniperMonkey;
-        towerSelected = true;
-      }
-   }
-   else {
-     //System.out.println("tower not in range");
-     cursor(ARROW);
-     noStroke();
-   } 
+
 }
 
 void makeBalloon(int h){
