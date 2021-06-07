@@ -7,7 +7,7 @@ public class Sniper extends Tower {
     range = 1000;
     speed = 2.0;
     timer = speed;
-    bulletVelocity = 30;
+    bulletVelocity = 50;
     c = color(0, 100, 0);
   }
   

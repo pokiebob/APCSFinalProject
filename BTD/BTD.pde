@@ -44,10 +44,10 @@ void draw(){
     //  print(time.getTime() + "\n"); 
     //}
     
-    Tower dartMonkey = new Tower(20, 6);
+    Tower dartMonkey = new Tower(18, 6);
     dartMonkey.display();
     
-    Tower sniperMonkey = new Sniper(20, 8);
+    Tower sniperMonkey = new Sniper(20, 6);
     sniperMonkey.display();
     
     spawnBalloon();
@@ -209,10 +209,11 @@ void mousePressed(){
 void displayStats(){
   textSize(32);
   textAlign(CENTER);
-  text("Round: " + round, 1000, 50); 
+  text("Round: " + round, 1000, 50);
+  textSize(20);
   text("Bank: " + bank, 1000, 100); 
-  text("Income: " + income, 1000, 150); 
-  text("Time Elapsed: " + (int) time.getTime(), 1000, 500);
+  text("Income: " + income, 1000, 125); 
+  text("Time Elapsed: " + (int) time.getTime(), 1000, 150);
   textAlign(LEFT);
 }
 
@@ -345,18 +346,18 @@ void dragTower() {
      }
    }
    else if (!selectingTower) {
-     if (dist(1000, 300, mouseX, mouseY) < 25) {
+     if (dist(900, 300, mouseX, mouseY) < 25) {
         //System.out.println("tower not selected");
         if (mousePressed) {
-          Tower newDartMonkey = new Tower(20, 6);
+          Tower newDartMonkey = new Tower(18, 6);
           curTower = newDartMonkey;
           draggingTower = true;
         }
      }
-     else if (dist(1000, 400, mouseX, mouseY) < 25) {
+     else if (dist(1000, 300, mouseX, mouseY) < 25) {
         //System.out.println("tower not selected");
         if (mousePressed) {
-          Tower newSniperMonkey = new Sniper(20, 8);
+          Tower newSniperMonkey = new Sniper(20, 6);
           curTower = newSniperMonkey;
           draggingTower = true;
         }
