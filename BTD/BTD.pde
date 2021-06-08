@@ -25,12 +25,14 @@ boolean selectingTower = false;
 Tower curTower, selectedTower;
 Timer time;
 Button start = new Button("Start", 600, 375, 100, 50);
+PImage dmonkey;
 
 void setup(){
   size(1200,750);
   //setBackground(); 
   start.display();
   time = new Timer(0);
+  dmonkey = loadImage("DartMonkey.png");
 }
 
 void draw(){
@@ -184,6 +186,8 @@ round 6 = 15 red, 4 green, 15 blue
 
 void displayTowerStats() {
   if (selectingTower) {
+    
+    
     stroke(0);
     fill(255);
     rect(850, 400, 300, 300);
@@ -192,6 +196,10 @@ void displayTowerStats() {
     textSize(20);
     textAlign(CENTER);
     text(selectedTower.name, 1000, 450);
+    
+    imageMode(CENTER);
+    dmonkey.resize(100, 0);
+    image(dmonkey, 1000, 525);
     
     textAlign(CORNER);
     textSize(15);
