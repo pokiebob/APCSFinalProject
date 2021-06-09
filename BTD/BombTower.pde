@@ -2,7 +2,7 @@ public class BombTower extends Tower {
   
   BombTower(int x, int y) {
     super(x, y);
-    cost = 650;
+    cost = 750;
     damage = 1;
     range = 250;
     speed = 1.4;
@@ -10,5 +10,7 @@ public class BombTower extends Tower {
     //bulletVelocity = 50;
     c = color(105);
     name = "Bomb Tower";
+    splashRadius = 100;
   }
+  
 }

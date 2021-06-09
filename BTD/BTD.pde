@@ -287,7 +287,7 @@ void detectBalloon() {
           if (t.name.equals("Dart Monkey")) {   
             b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
           } else if (t.name.equals("Bomb Tower")) {
-            b = new Bomb(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction);
+            b = new Bomb(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction, t.splashRadius);
           } else {
             b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
           }
@@ -314,7 +314,7 @@ void moveBullets(){
         if (b.name.equals("bomb")) {
           for (int k = 0; k < balloons.size(); k++) {
             Balloon surroundingBalloon = balloons.get(k);
-            if (dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= 75) {
+            if (dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= b.splashRadius) {
               int initial = balloon.health;
               surroundingBalloon.decreaseHealth(b.damage);
               if (surroundingBalloon.health <= 0) {
@@ -392,7 +392,8 @@ void dragTower() {
   if (draggingTower) {
      if (mousePressed && (mouseButton == LEFT)) {
        //currently dragging tower
-       selectingTower = false;
+       selectingTower = true;
+       selectedTower = curTower;
        curTower.drag();
        curTower.display();
        //Range
@@ -406,6 +407,7 @@ void dragTower() {
      } else {
        //you let go of tower
        draggingTower = false;
+       selectingTower = false;
        //if legal tower placement
        if (isLegalTowerPlacement()) {
          //System.out.println("legal tower placement");
@@ -414,6 +416,7 @@ void dragTower() {
          income -= (int) (curTower.cost * 0.07);
        }
        curTower = null;
+       selectedTower = null;
        //System.out.println(locatePatch()[0] + " " + locatePatch()[1]);
      }
    }
@@ -429,7 +432,7 @@ void dragTower() {
      else if (dist(1000, 300, mouseX, mouseY) < 25) {
         //System.out.println("tower not selected");
         if (mousePressed) {
-          Tower newSniperMonkey = new Sniper(20, 6);
+          Sniper newSniperMonkey = new Sniper(20, 6);
           curTower = newSniperMonkey;
           draggingTower = true;
         }
@@ -437,7 +440,7 @@ void dragTower() {
      else if (dist(1100, 300, mouseX, mouseY) < 25) {
         //System.out.println("tower not selected");
         if (mousePressed) {
-          Tower newBombTower = new BombTower(22, 6);
+          BombTower newBombTower = new BombTower(22, 6);
           curTower = newBombTower;
           draggingTower = true;
         }

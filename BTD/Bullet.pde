@@ -6,6 +6,7 @@ public class Bullet {
   int curX;
   int curY;
   int direction;
+  int splashRadius;
   boolean hitBalloon;
   String name;
   
@@ -16,6 +17,7 @@ public class Bullet {
     this.curX = curX;
     this.curY = curY;
     this.direction = direction;
+    this.splashRadius = 1;
     hitBalloon = false;
     name = "dart";
   }
