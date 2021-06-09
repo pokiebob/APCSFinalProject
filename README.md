@@ -78,3 +78,9 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Tower images shown in displayed stats
 - Stopped using hand cursor
 - Modified sniper bullet velocity and increased balloon hit box to compensate for sniper missing balloons on occasion
+
+6/8: Cyrus
+- Created BombTower and Bomb classes and added it to menu
+- Bombs deal splash damage to surrounding balloons
+- Tower stats displayed when dragging tower
+- Display tower stats modified to include level
