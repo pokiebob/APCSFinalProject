@@ -53,6 +53,9 @@ void draw(){
     Tower sniperMonkey = new Sniper(20, 6);
     sniperMonkey.display();
     
+    Tower bombTower = new BombTower(22, 6);
+    bombTower.display();
+    
     spawnBalloon();
     moveBalloons();
     moveBullets();
@@ -396,6 +399,14 @@ void dragTower() {
         if (mousePressed) {
           Tower newSniperMonkey = new Sniper(20, 6);
           curTower = newSniperMonkey;
+          draggingTower = true;
+        }
+     }
+     else if (dist(1100, 300, mouseX, mouseY) < 25) {
+        //System.out.println("tower not selected");
+        if (mousePressed) {
+          Tower newBombTower = new BombTower(22, 6);
+          curTower = newBombTower;
           draggingTower = true;
         }
      }
