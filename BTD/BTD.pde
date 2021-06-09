@@ -305,17 +305,36 @@ void moveBullets(){
     while (!b.hitBalloon && j < balloons.size()) {
       Balloon balloon = balloons.get(j);
       if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 25) {
-        b.hitBalloon = true;
-        bullets.remove(i);
-        int initial = balloon.health;
-        balloon.decreaseHealth(b.damage);
-        if (balloon.health <= 0) {
-          income += initial;
-          balloons.remove(j);
+        if (b.name.equals("bomb")) {
+          for (int k = 0; k < balloons.size(); k++) {
+            Balloon surroundingBalloon = balloons.get(k);
+            if (dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= 75) {
+              int initial = balloon.health;
+              surroundingBalloon.decreaseHealth(b.damage);
+              if (surroundingBalloon.health <= 0) {
+                income += initial;
+                balloons.remove(k);
+              }
+              else {
+                income += b.damage;
+              }
+            }
+          }
         }
         else {
-          income += b.damage;
+          int initial = balloon.health;
+          balloon.decreaseHealth(b.damage);
+          if (balloon.health <= 0) {
+            income += initial;
+            balloons.remove(j);
+          }
+          else {
+            income += b.damage;
+          }
         }
+        b.hitBalloon = true;
+        bullets.remove(i);
+        
       }
       j++;
     }
