@@ -277,7 +277,14 @@ void detectBalloon() {
         if (isInRange(balloon, t)) {
           //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
           int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
-          Bullet b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
+          Bullet b;
+          if (t.name.equals("Dart Monkey")) {   
+            b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
+          } else if (t.name.equals("Bomb Tower")) {
+            b = new Bomb(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction);
+          } else {
+            b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
+          }
           b.display();
           bullets.add(b);
           t.canShoot = false;

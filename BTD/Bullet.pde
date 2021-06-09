@@ -7,6 +7,7 @@ public class Bullet {
   int curY;
   int direction;
   boolean hitBalloon;
+  String name;
   
   Bullet(int damage, int speed, int range, int curX, int curY, int direction){
     this.damage = damage;
@@ -16,6 +17,7 @@ public class Bullet {
     this.curY = curY;
     this.direction = direction;
     hitBalloon = false;
+    name = "dart";
   }
   
   void display(){

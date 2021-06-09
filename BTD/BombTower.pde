@@ -5,7 +5,7 @@ public class BombTower extends Tower {
     cost = 650;
     damage = 1;
     range = 250;
-    speed = 0.63;
+    speed = 1.1;
     timer = speed;
     //bulletVelocity = 50;
     c = color(105);
