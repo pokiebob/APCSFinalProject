@@ -25,7 +25,7 @@ boolean selectingTower = false;
 Tower curTower, selectedTower;
 Timer time;
 Button start = new Button("Start", 600, 375, 100, 50);
-PImage dmonkey, smonkey;
+PImage dmonkey, smonkey, btower;
 
 void setup(){
   size(1200,750);
@@ -34,6 +34,7 @@ void setup(){
   time = new Timer(0);
   dmonkey = loadImage("DartMonkey.png");
   smonkey = loadImage("SniperMonkey.png");
+  btower = loadImage("BombTower.png");
 }
 
 void draw(){
@@ -210,6 +211,11 @@ void displayTowerStats() {
       imageMode(CENTER);
       smonkey.resize(0, 125);
       image(smonkey, 1000, 525);
+    }
+    else if (selectedTower.name.equals("Bomb Tower")) {
+      imageMode(CENTER);
+      btower.resize(0, 125);
+      image(btower, 1000, 525);
     }
 
     
