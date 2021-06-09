@@ -5,6 +5,7 @@ public class Tower {
   int range;
   int bulletVelocity;
   int splashRadius;
+  int level;
   double speed;
   double timer;
   color c;
@@ -20,6 +21,7 @@ public class Tower {
     timer = speed;
     bulletVelocity = 15;
     splashRadius = 1;
+    level = 1;
     c = color(175, 100, 0);
     this.x = x * 50;
     this.y = y * 50;

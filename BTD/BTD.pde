@@ -200,30 +200,28 @@ void displayTowerStats() {
     fill(0);
     textSize(20);
     textAlign(CENTER);
-    text(selectedTower.name, 1000, 450);
+    text(selectedTower.name, 1000, 425);
+    textSize(15);
+    text("Level: " + selectedTower.level, 1000, 450);
     
+    imageMode(CENTER);
     if (selectedTower.name.equals("Dart Monkey")) {
-      imageMode(CENTER);
       dmonkey.resize(0, 125);
       image(dmonkey, 1000, 525);
     }
     else if (selectedTower.name.equals("Sniper Monkey")) {
-      imageMode(CENTER);
       smonkey.resize(0, 125);
       image(smonkey, 1000, 525);
     }
     else if (selectedTower.name.equals("Bomb Tower")) {
-      imageMode(CENTER);
       btower.resize(0, 125);
       image(btower, 1000, 525);
     }
 
     
-    textAlign(CORNER);
-    textSize(15);
-    text("Cost: " + selectedTower.cost, 900, 625);
-    text("Damage: " + selectedTower.damage, 900, 650);
-    text("Range: " + selectedTower.range, 900, 675);
+    text("Cost: " + selectedTower.cost, 1000, 625);
+    text("Damage: " + selectedTower.damage, 1000, 650);
+    text("Range: " + selectedTower.range, 1000, 675);
   }
 }
 
