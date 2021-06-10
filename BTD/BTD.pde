@@ -6,7 +6,7 @@ int[][] background = pumpkinPatch();
 
 int colPatch = 16;
 int rowPatch = 15;
-int bank = 1000; 
+int bank = 650; 
 int income = 100; 
 int ticks = 0;
 int lives = 150;
@@ -151,6 +151,44 @@ void spawnBalloon() {
         }
       }
     }
+    
+    else if (round == 7) {
+      if (ticks < 450){
+       if(ticks < 200) {
+         if(ticks % 10 == 0) makeBalloon(2);
+        } else if (ticks < 250) {
+          if (ticks % 10 == 0) makeBalloon(3);
+        }
+        else {
+          if (ticks % 10 == 0) makeBalloon(1);
+        }
+      }
+    }
+    
+    else if (round == 8) {
+      if (ticks < 440){
+       if(ticks < 200) {
+         if(ticks % 10 == 0) makeBalloon(2);
+        } else if (ticks < 340) {
+          if (ticks % 10 == 0) makeBalloon(3);
+        }
+        else {
+          if (ticks % 10 == 0) makeBalloon(1);
+        }
+      }
+    }
+    
+    else if (round == 9) {
+      if (ticks < 300){
+        if(ticks % 10 == 0) makeBalloon(3);
+      }
+    }
+    
+    else if (round == 10) {
+      if (ticks < 1020){
+        if(ticks % 10 == 0) makeBalloon(2);
+      }
+    }
   
   }
   
@@ -183,6 +221,18 @@ void setTicks(){
   else if (round == 6){
     ticks = 340;
   }
+  else if (round == 7){
+    ticks = 450;
+  }
+  else if (round == 8){
+    ticks = 440;
+  }
+  else if (round == 9){
+    ticks = 300;
+  }
+  else if (round == 10){
+    ticks = 1020;
+  }
   ticks += 200;
   if (round > 1) bank += income;
 }
@@ -193,11 +243,11 @@ round 2 = 35 red
 round 3 = 25 red, 5 blue
 round 4 = 35 red, 18 blue
 round 5 = 5 red, 27 blue 
-round 6 = 15 red, 4 green, 15 blue 
-round 7 = 
-round 8 =
-round 9 = 
-round 10 = 
+round 6 = 15 red, 15 blue, 4 green
+round 7 = 20 red, 20 blue, 5 green
+round 8 = 10 red, 20 blue, 14 green
+round 9 = 30 green
+round 10 = 102 blue
 */
 
 void displayTowerStats() {
@@ -338,7 +388,7 @@ void moveBullets(){
     while (!b.hitBalloon && j < balloons.size()) {
       Balloon balloon = balloons.get(j);
       if (b.visitedBalloons.contains(balloon)){
-        print("already visited");
+        //print("already visited");
         j++; 
       }
       else {
@@ -456,7 +506,7 @@ void dragTower() {
          //System.out.println("legal tower placement");
          towers.add(curTower);
          bank -= curTower.cost;
-         income -= (int) (curTower.cost * 0.05);
+         income -= (int) (curTower.cost * 0.07);
        }
        curTower = null;
        selectedTower = null;
