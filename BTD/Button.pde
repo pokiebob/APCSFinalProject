@@ -5,6 +5,7 @@ public class Button {
   float y;    // top left corner y position
   float w;    // width of button
   float h;    // height of button
+  boolean activated;
   
   Button(String labelB, float xpos, float ypos, float widthB, float heightB) {
     label = labelB;
@@ -12,6 +13,7 @@ public class Button {
     y = ypos;
     w = widthB;
     h = heightB;
+    activated = true;
   }
   
   void display() {
@@ -20,7 +22,12 @@ public class Button {
     strokeWeight(2);
     fill(30, 90, 23);
     rect(x, y, w - 5, h - 5, 10);
-    fill(105,228,0);
+    
+    if (activated) {
+      fill(105,228,0);
+    } else {
+      fill(200);
+    }
     strokeWeight(1);
     noStroke();
     rect(x, y, w - 15, h - 15, 10);
@@ -33,6 +40,9 @@ public class Button {
   }
   
   boolean mouseIsOver() {
+    if (! activated) {
+      return false;
+    }
     if (mouseX > (x - w/2) && mouseX < (x + w/2) && mouseY > (y - h/2) && mouseY < (y + h/2)) {
       return true;
     }
