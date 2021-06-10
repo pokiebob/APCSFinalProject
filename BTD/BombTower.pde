@@ -10,7 +10,7 @@ public class BombTower extends Tower {
     //bulletVelocity = 50;
     c = color(105);
     name = "Bomb Tower";
-    splashRadius = 100;
+    splashRadius = 40;
   }
   
 }

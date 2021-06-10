@@ -7,7 +7,7 @@ int[][] background = pumpkinPatch();
 
 int colPatch = 16;
 int rowPatch = 15;
-int bank = 650; 
+int bank = 1000; 
 int income = 100; 
 int ticks = 0;
 int lives = 150;
@@ -187,12 +187,14 @@ round 3 = 25 red, 5 blue
 round 4 = 35 red, 18 blue
 round 5 = 5 red, 27 blue 
 round 6 = 15 red, 4 green, 15 blue 
+round 7 = 
+round 8 =
+round 9 = 
+round 10 = 
 */
 
 void displayTowerStats() {
   if (selectingTower) {
-    
-    
     stroke(0);
     fill(255);
     rect(850, 400, 300, 300);
@@ -201,7 +203,7 @@ void displayTowerStats() {
     textSize(20);
     textAlign(CENTER);
     text(selectedTower.name, 1000, 425);
-    textSize(15);
+    textSize(12);
     text("Level: " + selectedTower.level, 1000, 450);
     
     imageMode(CENTER);
@@ -217,11 +219,14 @@ void displayTowerStats() {
       btower.resize(0, 125);
       image(btower, 1000, 525);
     }
-
     
-    text("Cost: " + selectedTower.cost, 1000, 625);
-    text("Damage: " + selectedTower.damage, 1000, 650);
-    text("Range: " + selectedTower.range, 1000, 675);
+    //Button upgradeTower = new Button("Upgrade", );
+    textAlign(CORNER);
+   
+    text("Cost: " + selectedTower.cost, 875, 625);
+    text("Damage: " + selectedTower.damage, 875, 645);
+    text("Range: " + selectedTower.range, 875, 665);
+    text("Reload: " + (double) (int) ((selectedTower.speed) * 10 + 0.5) / 10, 875, 685);
   }
 }
 
@@ -310,7 +315,7 @@ void moveBullets(){
       Balloon balloon = balloons.get(j);
       if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 25) {
         if (b.name.equals("bomb")) {
-          for (int k = 0; k < balloons.size(); k++) {
+          for (int k = balloons.size() - 1; k >= 0; k--) {
             Balloon surroundingBalloon = balloons.get(k);
             if (dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= b.splashRadius) {
               int initial = balloon.health;
