@@ -220,7 +220,8 @@ void displayTowerStats() {
       image(btower, 1000, 525);
     }
     
-    //Button upgradeTower = new Button("Upgrade", );
+    Button upgradeTower = new Button("Upgrade", 1075, 645, 100, 50);
+    upgradeTower.display();
     textAlign(CORNER);
    
     text("Cost: " + selectedTower.cost, 875, 625);
