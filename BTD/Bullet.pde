@@ -9,6 +9,7 @@ public class Bullet {
   int splashRadius;
   int sharpness;
   boolean hitBalloon;
+  ArrayList<Balloon> visitedBalloons = new ArrayList<Balloon>();
   String name;
   
   Bullet(int damage, int speed, int range, int curX, int curY, int direction, int sharpness){
@@ -44,6 +45,8 @@ public class Bullet {
     //print(curY);
   }
  
-  //hitsBalloon();
+  void hitBalloon(Balloon b){
+    visitedBalloons.add(b);
+  }
   
 }

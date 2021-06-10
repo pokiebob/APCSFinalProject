@@ -1,6 +1,5 @@
 //Balloon Tower Defense
-import java.util.Arrays;
-     
+import java.util.Arrays;   
 //title screen 
      
 int[][] background = pumpkinPatch();
@@ -225,6 +224,7 @@ void displayTowerStats() {
     
     if (mousePressed && upgradeTower.mouseIsOver()) {
       selectedTower.upgrade();
+      selectingTower = false;
     }
     
     textAlign(CORNER);
@@ -320,7 +320,12 @@ void moveBullets(){
     int j = 0;
     while (!b.hitBalloon && j < balloons.size()) {
       Balloon balloon = balloons.get(j);
-      if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 25) {
+      if (b.visitedBalloons.contains(balloon)){
+        print("already visited");
+        j++; 
+      }
+      else {
+        if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 25) {
         if (b.name.equals("bomb")) {
           for (int k = balloons.size() - 1; k >= 0; k--) {
             Balloon surroundingBalloon = balloons.get(k);
@@ -346,15 +351,19 @@ void moveBullets(){
           }
           else {
             income += b.damage;
+            b.hitBalloon(balloon);
           }
         }
-        b.hitBalloon = true;
+       
         b.sharpness--;
         if (b.sharpness <= 0){
           bullets.remove(i);
+          b.hitBalloon = true;
         }
       }
       j++;
+      }
+      
     }
     
     if (bullets.size() > 0 && b.range <= 0){
@@ -364,7 +373,6 @@ void moveBullets(){
       b.display();
       b.move();
     }
-    
   }
 }
 
@@ -506,7 +514,7 @@ void moveBalloons(){
 
 void keyPressed(){
   if (key == 32){
-    makeBalloon(2);
+    makeBalloon(4);
   }
 }
 

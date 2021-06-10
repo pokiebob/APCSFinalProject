@@ -46,7 +46,23 @@ public class Tower {
   }
 
   void upgrade(){
-    
+    if (level == 1) {
+      level = 2;
+      sharpness++;
+      range = 200;
+      speed -= 0.1;
+    }
+    else if (level == 2) {
+      level = 3;
+      sharpness++;
+      range = 225;
+      speed -= 0.1;
+    }
+    else if (level == 3) {
+      level = 4;
+      sharpness++;
+      speed -= 0.1;
+    }
   }
 
 }
