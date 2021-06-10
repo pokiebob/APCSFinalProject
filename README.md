@@ -84,3 +84,10 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Bombs deal splash damage to surrounding balloons
 - Tower stats displayed when dragging tower
 - Display tower stats modified to include level
+
+6/9: Group Call
+- Added some ballon types and balanced game
+- Created upgrade button that upgrades to 4 levels for each tower
+- Fixed path error due to high speed balloons
+- Edited display tower stats
+- To Do: Start and end screens, upgrade cost, complete 20 rounds
