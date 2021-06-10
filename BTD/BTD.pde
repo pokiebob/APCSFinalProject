@@ -23,14 +23,17 @@ boolean selectingTower = false;
 
 Tower curTower, selectedTower;
 Timer time;
-Button start = new Button("Start", 600, 375, 100, 50);
+Button start = new Button("Start", 600, 600, 200, 100);
 SoundFile song;
 SoundFile pop;
-PImage dmonkey, smonkey, btower;
+PImage dmonkey, smonkey, btower, startScreen;
 
 void setup(){
   size(1200,750);
-  //setBackground(); 
+  //setBackground();
+  startScreen = loadImage("StartScreen.jpg");
+  startScreen.resize(1200, 0);
+  image(startScreen, 0, 0);
   start.display();
   time = new Timer(0);
   dmonkey = loadImage("DartMonkey.png");
