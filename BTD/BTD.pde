@@ -222,12 +222,18 @@ void displayTowerStats() {
     
     Button upgradeTower = new Button("Upgrade", 1075, 645, 100, 50);
     upgradeTower.display();
+    
+    if (mousePressed && upgradeTower.mouseIsOver()) {
+      selectedTower.upgrade();
+    }
+    
     textAlign(CORNER);
    
     text("Cost: " + selectedTower.cost, 875, 625);
     text("Damage: " + selectedTower.damage, 875, 645);
     text("Range: " + selectedTower.range, 875, 665);
-    text("Reload: " + (double) (int) ((selectedTower.speed) * 10 + 0.5) / 10, 875, 685);
+    text("Sharpness: " + selectedTower.sharpness, 875, 685);
+    //text("Reload: " + (double) (int) ((selectedTower.speed) * 10 + 0.5) / 10, 875, 685);
   }
 }
 
@@ -289,11 +295,11 @@ void detectBalloon() {
           int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
           Bullet b;
           if (t.name.equals("Dart Monkey")) {   
-            b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
+            b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction, t.sharpness); 
           } else if (t.name.equals("Bomb Tower")) {
             b = new Bomb(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction, t.splashRadius);
           } else {
-            b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction); 
+            b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction, t.sharpness); 
           }
           b.display();
           bullets.add(b);
@@ -343,8 +349,10 @@ void moveBullets(){
           }
         }
         b.hitBalloon = true;
-        bullets.remove(i);
-        
+        b.sharpness--;
+        if (b.sharpness <= 0){
+          bullets.remove(i);
+        }
       }
       j++;
     }
@@ -417,7 +425,7 @@ void dragTower() {
          //System.out.println("legal tower placement");
          towers.add(curTower);
          bank -= curTower.cost;
-         income -= (int) (curTower.cost * 0.07);
+         income -= (int) (curTower.cost * 0.05);
        }
        curTower = null;
        selectedTower = null;

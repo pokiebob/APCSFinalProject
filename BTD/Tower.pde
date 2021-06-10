@@ -6,6 +6,7 @@ public class Tower {
   int bulletVelocity;
   int splashRadius;
   int level;
+  int sharpness;
   double speed;
   double timer;
   color c;
@@ -22,6 +23,7 @@ public class Tower {
     bulletVelocity = 15;
     splashRadius = 1;
     level = 1;
+    sharpness = 1;
     c = color(175, 100, 0);
     this.x = x * 50;
     this.y = y * 50;
@@ -43,6 +45,8 @@ public class Tower {
     noStroke();
   }
 
-  
+  void upgrade(){
+    
+  }
 
 }
