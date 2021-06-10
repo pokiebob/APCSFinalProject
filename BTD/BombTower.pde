@@ -4,7 +4,7 @@ public class BombTower extends Tower {
     super(x, y);
     cost = 750;
     damage = 1;
-    range = 250;
+    range = 200;
     speed = 1.4;
     timer = speed;
     //bulletVelocity = 50;
@@ -16,7 +16,7 @@ public class BombTower extends Tower {
   void upgrade(){
     if (level == 1) {
       level = 2;
-      range = 275;
+      range = 225;
       speed -= 0.1;
       damage = 2;
       splashRadius = 60;
@@ -24,7 +24,7 @@ public class BombTower extends Tower {
     }
     else if (level == 2) {
       level = 3;
-      range = 300;
+      range = 250;
       speed -= 0.1;
       damage = 3;
       splashRadius = 80;

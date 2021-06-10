@@ -357,13 +357,12 @@ void detectBalloon() {
           Bullet b;
           if (t.name.equals("Dart Monkey")) {  
             //Triple shot function
-            if (level == 4) {
+            if (t.level == 4) {
               Bullet b1 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction + 10, t.sharpness); 
               Bullet b2 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction - 10, t.sharpness); 
               bullets.add(b1);
               bullets.add(b2);
-              b1.display();
-              b2.display();
+              //print("triple shot");
             }
             b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction, t.sharpness); 
           } else if (t.name.equals("Bomb Tower")) {
@@ -385,7 +384,7 @@ boolean isInRange(Balloon b, Tower t) {
 }
 
 void moveBullets(){
-  for (int i = 0; i < bullets.size(); i++){
+  for (int i = bullets.size() - 1; i >= 0; i--){
     Bullet b = bullets.get(i);
     int j = 0;
     while (!b.hitBalloon && j < balloons.size()) {
@@ -441,13 +440,19 @@ void moveBullets(){
       }
       
     }
-    
-    if (bullets.size() > 0 && b.range <= 0){
-      bullets.remove(i); 
+    try {
+      if (bullets.size() > 0 && b.range <= 0){
+        bullets.remove(i); 
+      }
+      else {
+        b.display();
+        b.move();
+      }
     }
-    else {
-      b.display();
-      b.move();
+    catch (IndexOutOfBoundsException e){
+
+      //print("hi");
+      continue;
     }
   }
 }
@@ -653,7 +658,7 @@ boolean isLegalTowerPlacement() {
     }
   }
   catch (ArrayIndexOutOfBoundsException e){
-    print("hi");
+    //print("hi");
     return false;
   }
   return true;
