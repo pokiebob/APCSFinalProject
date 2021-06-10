@@ -25,6 +25,7 @@ Tower curTower, selectedTower;
 Timer time;
 Button start = new Button("Start", 600, 375, 100, 50);
 SoundFile song;
+SoundFile pop;
 PImage dmonkey, smonkey, btower;
 
 void setup(){
@@ -36,12 +37,16 @@ void setup(){
   smonkey = loadImage("SniperMonkey.png");
   btower = loadImage("BombTower.png");
   song = new SoundFile(this, "BTDsong.mp3");
-  song.loop();
+  pop = new SoundFile(this, "Pop.mp3");
+  //song.loop();
 }
 
 void draw(){
  
   if (hasStarted){ 
+    if (!song.isPlaying()){
+      song.play();
+    }
     noStroke();
     //time = millis() * 1000;
     //print(time + "\n");
@@ -338,40 +343,46 @@ void moveBullets(){
       }
       else {
         if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 40) {
-        if (b.name.equals("bomb")) {
-          for (int k = balloons.size() - 1; k >= 0; k--) {
-            Balloon surroundingBalloon = balloons.get(k);
-            if (dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= b.splashRadius) {
-              int initial = balloon.health;
-              surroundingBalloon.decreaseHealth(b.damage);
-              if (surroundingBalloon.health <= 0) {
-                income += initial;
-                balloons.remove(k);
-              }
-              else {
-                income += b.damage;
+          if (b.name.equals("bomb")) {
+            for (int k = balloons.size() - 1; k >= 0; k--) {
+              Balloon surroundingBalloon = balloons.get(k);
+              if (dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= b.splashRadius) {
+                int initial = balloon.health;
+                surroundingBalloon.decreaseHealth(b.damage);
+                if (surroundingBalloon.health <= 0) {
+                  income += initial;
+                  balloons.remove(k);
+                  if (!pop.isPlaying()){
+                    pop.play();
+                  }
+                }
+                else {
+                  income += b.damage;
+                }
               }
             }
           }
-        }
-        else {
-          int initial = balloon.health;
-          balloon.decreaseHealth(b.damage);
-          if (balloon.health <= 0) {
-            income += initial;
-            balloons.remove(j);
-          }
           else {
-            income += b.damage;
-            b.hitBalloon(balloon);
+            int initial = balloon.health;
+            balloon.decreaseHealth(b.damage);
+            if (balloon.health <= 0) {
+              income += initial;
+              balloons.remove(j);
+              if (!pop.isPlaying()){
+                pop.play();
+              }
+            }
+            else {
+              income += b.damage;
+              b.hitBalloon(balloon);
+            }
           }
-        }
-       
-        b.sharpness--;
-        if (b.sharpness <= 0){
-          bullets.remove(i);
-          b.hitBalloon = true;
-        }
+         
+          b.sharpness--;
+          if (b.sharpness <= 0){
+            bullets.remove(i);
+            b.hitBalloon = true;
+          }
       }
       j++;
       }
