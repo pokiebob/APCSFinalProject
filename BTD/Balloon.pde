@@ -48,7 +48,7 @@ public class Balloon {
     }
     //Pink
     else if (health==5){
-      c = color(0,0,0); 
+      c = color(255,100,180); 
       speed = 5;
     }
     smooth();

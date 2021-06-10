@@ -294,7 +294,16 @@ void detectBalloon() {
           //int direction = (t.y - balloon.curY) / (t.x - balloon.curX) * 360;
           int direction = 180 - (int) degrees(atan2((float) (t.y - balloon.curY), (float) (t.x - balloon.curX)));
           Bullet b;
-          if (t.name.equals("Dart Monkey")) {   
+          if (t.name.equals("Dart Monkey")) {  
+            //Triple shot function
+            if (level == 4) {
+              Bullet b1 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction + 10, t.sharpness); 
+              Bullet b2 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction - 10, t.sharpness); 
+              bullets.add(b1);
+              bullets.add(b2);
+              b1.display();
+              b2.display();
+            }
             b = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction, t.sharpness); 
           } else if (t.name.equals("Bomb Tower")) {
             b = new Bomb(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction, t.splashRadius);
@@ -325,7 +334,7 @@ void moveBullets(){
         j++; 
       }
       else {
-        if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 25) {
+        if (dist(b.curX, b.curY, balloon.curX, balloon.curY) <= 40) {
         if (b.name.equals("bomb")) {
           for (int k = balloons.size() - 1; k >= 0; k--) {
             Balloon surroundingBalloon = balloons.get(k);
@@ -490,11 +499,11 @@ void moveBalloons(){
          b.move(1,0);
        }
      }
-     else if (b.curY == 75 || b.curY == 475){
+     else if (b.curY < 650 && (b.curY <= 75 || b.curY >= 475)){
        //Moves left
        b.move(-1, 0);
      }
-     else if (b.curX == 725 && b.curY < 525){
+     else if (b.curX > 725 && b.curY < 525){
        //Move down (right side move down)
        b.move(0, 1);
      }
@@ -514,7 +523,7 @@ void moveBalloons(){
 
 void keyPressed(){
   if (key == 32){
-    makeBalloon(4);
+    makeBalloon(5);
   }
 }
 

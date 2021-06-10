@@ -13,4 +13,28 @@ public class BombTower extends Tower {
     splashRadius = 40;
   }
   
+  void upgrade(){
+    if (level == 1) {
+      level = 2;
+      range = 275;
+      speed -= 0.1;
+      damage = 2;
+      splashRadius = 60;
+      bulletVelocity = 20;
+    }
+    else if (level == 2) {
+      level = 3;
+      range = 300;
+      speed -= 0.1;
+      damage = 3;
+      splashRadius = 80;
+      bulletVelocity = 25; 
+    }
+    else if (level == 3) {
+      level = 4;
+      speed -= 0.2;
+      damage = 5;
+    }
+  }
+  
 }

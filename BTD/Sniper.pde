@@ -12,4 +12,21 @@ public class Sniper extends Tower {
     name = "Sniper Monkey";
   }
   
+  void upgrade(){
+    if (level == 1) {
+      level = 2;
+      speed -= 0.3;
+      damage = 5;
+    }
+    else if (level == 2) {
+      level = 3;
+      speed -= 0.3;
+      damage = 7;
+    }
+    else if (level == 3) {
+      level = 4;
+      speed -= 0.2;
+      damage = 9;
+    }
+  }
 }
