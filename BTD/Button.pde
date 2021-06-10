@@ -15,14 +15,21 @@ public class Button {
   }
   
   void display() {
-    fill(218);
-    stroke(141);
+    stroke(255);
     rectMode(CENTER);
-    rect(x, y, w, h, 10);
+    strokeWeight(2);
+    fill(30, 90, 23);
+    rect(x, y, w - 5, h - 5, 10);
+    fill(105,228,0);
+    strokeWeight(1);
+    noStroke();
+    rect(x, y, w - 15, h - 15, 10);
     rectMode(CORNER);
     textAlign(CENTER);
     fill(0);
-    text(label, x, y);
+    textSize(h / 3);
+    text(label, x, y + h/10);
+    textSize(12);
   }
   
   boolean mouseIsOver() {

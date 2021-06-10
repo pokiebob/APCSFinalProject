@@ -23,7 +23,7 @@ boolean selectingTower = false;
 
 Tower curTower, selectedTower;
 Timer time;
-Button start = new Button("Start", 600, 600, 200, 100);
+Button start = new Button("Start", 600, 712, 1200, 75);
 SoundFile song;
 SoundFile pop;
 PImage dmonkey, smonkey, btower, startScreen;
