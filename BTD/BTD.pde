@@ -358,8 +358,8 @@ void detectBalloon() {
           if (t.name.equals("Dart Monkey")) {  
             //Triple shot function
             if (t.level == 4) {
-              Bullet b1 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction + 10, t.sharpness); 
-              Bullet b2 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction - 10, t.sharpness); 
+              Bullet b1 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction + 25, t.sharpness); 
+              Bullet b2 = new Bullet(t.damage, t.bulletVelocity, t.range, t.x, t.y, direction - 25, t.sharpness); 
               bullets.add(b1);
               bullets.add(b2);
               //print("triple shot");
