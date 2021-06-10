@@ -1,6 +1,6 @@
 //Balloon Tower Defense
 import java.util.Arrays;   
-//title screen 
+import processing.sound.*;
      
 int[][] background = pumpkinPatch();
 
@@ -24,6 +24,7 @@ boolean selectingTower = false;
 Tower curTower, selectedTower;
 Timer time;
 Button start = new Button("Start", 600, 375, 100, 50);
+SoundFile song;
 PImage dmonkey, smonkey, btower;
 
 void setup(){
@@ -34,6 +35,8 @@ void setup(){
   dmonkey = loadImage("DartMonkey.png");
   smonkey = loadImage("SniperMonkey.png");
   btower = loadImage("BombTower.png");
+  song = new SoundFile(this, "BTDsong.mp3");
+  song.loop();
 }
 
 void draw(){
