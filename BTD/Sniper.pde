@@ -30,6 +30,7 @@ public class Sniper extends Tower {
       level = 4;
       speed -= 0.3;
       damage = 9;
+      sharpness = 2;
     }
   }
 }

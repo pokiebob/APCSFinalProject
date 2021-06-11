@@ -6,7 +6,9 @@ int[][] background = pumpkinPatch();
 
 int colPatch = 16;
 int rowPatch = 15;
-int bank = 650; 
+//int bank = 650;
+int bank = 1000000;
+
 int income = 100; 
 int ticks = 0;
 int lives = 150;
@@ -97,99 +99,112 @@ void draw(){
   }
 }
 
+/*
+round 1 = 20 red
+round 2 = 35 red
+round 3 = 25 red, 10 blue
+round 4 = 35 red, 28 blue
+round 5 = 5 red, 27 blue, 4 green
+round 6 = 15 red, 15 blue, 10 green
+round 7 = 20 red, 20 blue, 20 green
+round 8 = 10 red, 20 blue, 30 green, 5 yellow
+round 9 = 30 green, 15 yellow
+round 10 = 102 blue, 30 green, 15 yellow, 4 pink
+*/
+
 void spawnBalloon() {
   if (ticks >= 0) {
-    
+    //round 1 = 20 red
     if (round == 1) {
       if (ticks < 200) {
         if(ticks % 10 == 0) makeBalloon(1);
       }
     }
-    
+    //round 2 = 35 red
     else if (round == 2) {
       if (ticks < 350) {
         if(ticks % 10 == 0) makeBalloon(1);
       }
     }
-    
+    //round 3 = 25 red, 10 blue
+    //300 ticks
     else if (round == 3) {
       if (ticks < 300){
-        if(ticks >= 250) {
-          if(ticks % 10 == 0) makeBalloon(2);
-        } else {
-          if (ticks % 10 == 0) makeBalloon(1);
-        }
+        if (ticks >= 50 && ticks % 10 == 0) makeBalloon(1);
+        if (ticks < 100 && ticks % 10 == 0) makeBalloon(2);
       }
     }
-    
+    //round 4 = 35 red, 28 blue
+    //350 ticks
     else if (round == 4) {
-      if (ticks < 530){ 
-        if(ticks > 180) {
-          if(ticks % 10 == 0) makeBalloon(2);
-        } else {
-          if (ticks % 10 == 0) makeBalloon(1);
-        }
+      if (ticks < 350) {
+        if (ticks % 10 == 0) makeBalloon(1);
+        if (ticks < 252 && ticks % 9 == 0) makeBalloon(2);
+        
       }
     }
-    
+    //round 5 = 5 red, 35 blue, 5 green
+    //450
     else if (round == 5) {
-      if (ticks < 320){ 
-        if(ticks > 270) {
-          if(ticks % 10 == 0) makeBalloon(2);
-        } else {
-          if (ticks % 10 == 0) makeBalloon(1);
+      if (ticks < 450) {
+        if (ticks < 400) {
+          if (ticks % 10 == 0) {
+            if ((ticks / 10) % 5 < 4) makeBalloon(2);
+            else makeBalloon(3);
+          }
         }
+        else if (ticks % 10 == 0) makeBalloon(1);
       }
     }
-    
+    //round 6 = 15 red, 15 blue, 10 green
+    //340 ticks
     else if (round == 6) {
       if (ticks < 340){
-       if(ticks < 150) {
-         if(ticks % 10 == 0) makeBalloon(2);
-        } else if (ticks < 190) {
-          if (ticks % 10 == 0) makeBalloon(3);
-        }
-        else {
-          if (ticks % 10 == 0) makeBalloon(1);
-        }
+        if (ticks >= 115 && ticks % 15 == 0) makeBalloon(1);
+        if (ticks < 200 && ticks % 20 == 0) makeBalloon(3);
+        if (ticks >= 40 && (ticks + 10) % 20 == 0) makeBalloon(2);
       }
     }
-    
+    //round 7 = 20 red, 20 blue, 20 green
+    //600
     else if (round == 7) {
-      if (ticks < 450){
-       if(ticks < 200) {
-         if(ticks % 10 == 0) makeBalloon(2);
-        } else if (ticks < 250) {
-          if (ticks % 10 == 0) makeBalloon(3);
-        }
-        else {
-          if (ticks % 10 == 0) makeBalloon(1);
-        }
+      if (ticks < 600){
+        if (ticks % 30 == 0) makeBalloon(1);
+        if ((ticks + 10) % 30 == 0) makeBalloon(3);
+        if ((ticks + 20) % 30 == 0) makeBalloon(2);
       }
     }
-    
+    //round 8 = 50 red, 20 blue, 30 green, 5 yellow
+    // ticks = 500
     else if (round == 8) {
       if (ticks < 440){
-       if(ticks < 200) {
-         if(ticks % 10 == 0) makeBalloon(2);
-        } else if (ticks < 340) {
-          if (ticks % 10 == 0) makeBalloon(3);
+       if ((ticks + 5) % 10 == 0) makeBalloon(1);
+       if (ticks % 10 == 0) {
+          if ((ticks / 10) % 5 < 3) makeBalloon(3);
+          else makeBalloon(2);
         }
-        else {
-          if (ticks % 10 == 0) makeBalloon(1);
-        }
+       if (ticks < 300 && ticks >= 250 && ticks % 10 == 0) makeBalloon(4);
+       
       }
     }
-    
+    //round 9 = 50 green, 15 yellow, 30 blue
+    // 950 ticks
     else if (round == 9) {
-      if (ticks < 300){
-        if(ticks % 10 == 0) makeBalloon(3);
+      if (ticks < 950){
+        if (ticks >= 150) {
+          if (ticks % 10 == 0) {
+            if ((ticks / 10) % 8 < 3) makeBalloon(2);
+            else makeBalloon(3);
+          }
+        }
+        else if(ticks % 10 == 0) makeBalloon(4);
       }
     }
-    
+    //round 10 = 200 red, 100 blue, 30 green, 15 yellow, 5 pink
+    // 1020 ticks
     else if (round == 10) {
       if (ticks < 1020){
-        if(ticks % 10 == 0) makeBalloon(2);
+        //
       }
     }
   
@@ -216,22 +231,22 @@ void setTicks(){
     ticks = 300;
   }
   else if (round == 4){
-    ticks = 530;
+    ticks = 350;
   }
   else if (round == 5){
-    ticks = 320;
+    ticks = 450;
   }
   else if (round == 6){
     ticks = 340;
   }
   else if (round == 7){
-    ticks = 450;
+    ticks = 600;
   }
   else if (round == 8){
-    ticks = 440;
+    ticks = 500;
   }
   else if (round == 9){
-    ticks = 300;
+    ticks = 950;
   }
   else if (round == 10){
     ticks = 1020;
@@ -243,14 +258,14 @@ void setTicks(){
 /*
 round 1 = 20 red
 round 2 = 35 red
-round 3 = 25 red, 5 blue
-round 4 = 35 red, 18 blue
-round 5 = 5 red, 27 blue 
-round 6 = 15 red, 15 blue, 4 green
-round 7 = 20 red, 20 blue, 5 green
-round 8 = 10 red, 20 blue, 14 green
-round 9 = 30 green
-round 10 = 102 blue
+round 3 = 25 red, 10 blue
+round 4 = 35 red, 28 blue
+round 5 = 5 red, 27 blue, 4 green
+round 6 = 15 red, 15 blue, 10 green
+round 7 = 20 red, 20 blue, 20 green
+round 8 = 10 red, 20 blue, 30 green, 5 yellow
+round 9 = 30 green, 15 yellow
+round 10 = 102 blue, 30 green, 15 yellow, 4 pink
 */
 
 void displayTowerStats() {
@@ -292,7 +307,7 @@ void displayTowerStats() {
       selectingTower = false;
     }
     
-    text("Upgrade Cost: " + selectedTower.upgradeCost, 1075, 685);
+    if (selectedTower.level < 4) text("Upgrade Cost: " + selectedTower.upgradeCost, 1075, 685);
     
     textAlign(CORNER);
    
@@ -415,6 +430,10 @@ void moveBullets(){
                   }
                 }
                 else {
+                  if (initial > 5 && surroundingBalloon.health < 5) {
+                    Balloon newBalloon = new Balloon(surroundingBalloon.health, surroundingBalloon.curX / 50 + 0.5, surroundingBalloon.curY / 50 + 0.5);
+                    balloons.add(newBalloon);  
+                  }
                   income += b.damage;
                 }
               }
@@ -431,6 +450,10 @@ void moveBullets(){
               }
             }
             else {
+              if (initial > 5 && balloon.health <= 5) {
+                Balloon newBalloon = new Balloon(balloon.health, balloon.curX / 50 + 0.5, balloon.curY / 50 + 0.5);
+                balloons.add(newBalloon);  
+              }
               income += b.damage;
               b.hitBalloon(balloon);
             }
@@ -601,7 +624,7 @@ void moveBalloons(){
 
 void keyPressed(){
   if (key == 32){
-    makeBalloon(5);
+    makeBalloon(6);
   }
 }
 
