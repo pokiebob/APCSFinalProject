@@ -10,6 +10,7 @@ https://docs.google.com/document/d/1tSAFTTgo5l4CAf2x9fFHQCuG0fYmOD8H5YnAuef8rGo/
 A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiwi. The goal is to build and upgrade your towers while the computer sends balloons at you. As each round passes, you receive money based on your income, which you can use to buy newly unlocked towers to defend against increasingly stronger balloons. Each tower has its own special feature and cost.
 
 ## Compile Instructions
+- Clone this repository into your computer 
 - Open the BTD file in Processing
 - Download the Sound library by going to Sketch -> Import Library
 - Press play!
