@@ -91,3 +91,13 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Fixed path error due to high speed balloons
 - Edited display tower stats
 - To Do: Start and end screens, upgrade cost, complete 20 rounds
+
+6/10: Group Call
+- Created 12 rounds  with increasing difficulty.
+- Added pop sound effects and background music
+- Created btd start screen and make buttons look good
+- Fixed triple shot upgrade for dart monkey
+- Upgrade buttons get deactivated at tower level 4
+- Balanced tower upgrade costs
+- Balanced Final rounds
+- Created Victory and Defeat screens with restart buttons
