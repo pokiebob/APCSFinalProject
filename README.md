@@ -7,7 +7,21 @@ https://docs.google.com/document/d/1tSAFTTgo5l4CAf2x9fFHQCuG0fYmOD8H5YnAuef8rGo/
 - Hasin Raihan
 
 ## Description
-A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiwi. The goal is to build and upgrade your towers while the computer sends balloons at you. As each round passes, you receive money based on your interest rate, which you can use to buy newly unlocked towers to defend against increasingly stronger balloons. Each balloon and tower has its own special feature and cost.
+A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiwi. The goal is to build and upgrade your towers while the computer sends balloons at you. As each round passes, you receive money based on your income, which you can use to buy newly unlocked towers to defend against increasingly stronger balloons. Each tower has its own special feature and cost.
+
+## Compile Instructions
+- Open the BTD file in Processing
+- Download the Sound library by going to Sketch -> Import Library
+- Press play!
+
+## How to Play
+- On the right hand side of your screen, there will be a menu with three towers: Dart Monkey, Sniper Monkey, and Bomb Tower!
+- Click and hold one of the towers to see their stats.
+- Place a tower by dragging it next to the balloon path. It will shoot at incoming balloons.
+- Each balloon you hit, your income will increase. At the end of each round, your income will be added to your bank.
+- Upgrade towers by selecting them and hitting the upgrade button.
+- Your goal is to survive 12 rounds... good luck!
+- Note: Black balloons are immune to explosions.
 
 ## Development Log
 
