@@ -22,7 +22,21 @@ A tower defense game based on the “Bloons Tower Defense” series by Ninja Kiw
 - Each balloon you hit, your income will increase. At the end of each round, your income will be added to your bank.
 - Upgrade towers by selecting them and hitting the upgrade button.
 - Your goal is to survive 12 rounds... good luck!
-- Note: Black balloons are immune to explosions.
+
+## Towers
+- Dart Monkey
+  - Cheap tower with medium range and reload rate. 
+  - Upgrades increase range and sharpness, allowing tower to shoot multiple balloons at once. 
+  - At level 4, it unlocks triple shot.
+- Sniper Monkey
+  - Infinite range, high damage tower with slow reload rate.
+  - Upgrades increase damage and reload rate.
+  - At level 4, it unlocks sharpness, allowing it to shoot through two balloons at once.
+- Bomb Tower
+  - Expensive tower with medium range and reload rate.
+  - Deals splash damage to neighboring balloons.
+  - Upgrades increase Damage, splash radius, and range.
+  - Black balloons are immune to bomb tower explosions.
 
 ## Development Log
 
