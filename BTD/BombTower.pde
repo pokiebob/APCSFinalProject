@@ -7,6 +7,7 @@ public class BombTower extends Tower {
     range = 200;
     speed = 1.4;
     timer = speed;
+    upgradeCost = 400;
     //bulletVelocity = 50;
     c = color(105);
     name = "Bomb Tower";
@@ -17,23 +18,23 @@ public class BombTower extends Tower {
     if (level == 1) {
       level = 2;
       range = 225;
-      speed -= 0.1;
-      damage = 2;
-      splashRadius = 60;
+      splashRadius = 50;
       bulletVelocity = 20;
+      upgradeCost = 600;
     }
     else if (level == 2) {
       level = 3;
       range = 250;
-      speed -= 0.1;
-      damage = 3;
-      splashRadius = 80;
-      bulletVelocity = 25; 
+      damage = 2;
+      splashRadius = 65;
+      bulletVelocity = 25;
+      upgradeCost = 800;
+      
     }
     else if (level == 3) {
       level = 4;
-      speed -= 0.2;
-      damage = 5;
+      speed -= 0.3;
+      damage = 3;
     }
   }
   

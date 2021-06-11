@@ -25,7 +25,7 @@ public class Tower {
     splashRadius = 1;
     level = 1;
     sharpness = 1;
-    //upgradeCost = 
+    upgradeCost = 300;
     c = color(175, 100, 0);
     this.x = x * 50;
     this.y = y * 50;
@@ -52,18 +52,17 @@ public class Tower {
       level = 2;
       sharpness++;
       range = 200;
-      speed -= 0.1;
+      upgradeCost = 400;
     }
     else if (level == 2) {
       level = 3;
       sharpness++;
       range = 225;
-      speed -= 0.1;
+      upgradeCost = 500;
     }
     else if (level == 3) {
       level = 4;
       sharpness++;
-      speed -= 0.1;
     }
   }
 

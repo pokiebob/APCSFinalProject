@@ -281,15 +281,18 @@ void displayTowerStats() {
     }
     
     Button upgradeTower = new Button("Upgrade", 1075, 645, 100, 50);
-    if (selectedTower.level == 4) {
+    if (selectedTower.upgradeCost > bank || selectedTower.level == 4) {
       upgradeTower.activated = false;
     }
     upgradeTower.display();
     
     if (mousePressed && upgradeTower.mouseIsOver()) {
+      bank -= selectedTower.upgradeCost;
       selectedTower.upgrade();
       selectingTower = false;
     }
+    
+    text("Upgrade Cost: " + selectedTower.upgradeCost, 1075, 685);
     
     textAlign(CORNER);
    
