@@ -4,54 +4,82 @@ import processing.sound.*;
      
 int[][] background = pumpkinPatch();
 
-int colPatch = 16;
-int rowPatch = 15;
-//int bank = 650;
-int bank = 1000000;
+int colPatch;
+int rowPatch;
+int bank;
+//int bank = 1000000;
 
-int income = 100; 
-int ticks = 0;
-int lives = 150;
-int level = 1;
-int round = 0;
+int income; 
+int ticks;
+int lives;
+int level;
+int round;
 
-ArrayList<Tower> towers = new ArrayList<Tower>();
-ArrayList<Balloon> balloons = new ArrayList<Balloon>();
-ArrayList<Bullet> bullets = new ArrayList<Bullet>(); 
+ArrayList<Tower> towers;
+ArrayList<Balloon> balloons;
+ArrayList<Bullet> bullets; 
 
-boolean hasStarted = false;
-boolean draggingTower = false;
-boolean selectingTower = false;
+boolean hasStarted;
+boolean hasLost;
+boolean hasWon;
+boolean draggingTower;
+boolean selectingTower;
 
 Tower curTower, selectedTower;
 Timer time;
 Button start = new Button("Start", 600, 712, 1200, 75);
 SoundFile song;
 SoundFile pop;
-PImage dmonkey, smonkey, btower, startScreen;
+PImage dmonkey, smonkey, btower, startScreen, victoryScreen, defeatScreen;
 
 void setup(){
+  colPatch = 16;
+  rowPatch = 15;
+  bank = 650;
+  income = 100;
+  ticks = 0;
+  lives = 150;
+  level = 1;
+  round = 0;
+  
+  towers = new ArrayList<Tower>();
+  balloons = new ArrayList<Balloon>();
+  bullets = new ArrayList<Bullet>();
+  
+  hasStarted = false;
+  hasLost = false;
+  hasWon = false;
+  draggingTower = false;
+  selectingTower = false;
+    
   size(1200,750);
   //setBackground();
   startScreen = loadImage("StartScreen.jpg");
   startScreen.resize(1200, 0);
   image(startScreen, 0, 0);
+  stroke(0);
+  strokeWeight(15);
+  line(725, 75, 615, 215);
+  //line(615, 75, 725, 215);
+  strokeWeight(1);
   start.display();
   time = new Timer(0);
   dmonkey = loadImage("DartMonkey.png");
   smonkey = loadImage("SniperMonkey.png");
   btower = loadImage("BombTower.png");
+  victoryScreen = loadImage("VictoryScreen.jpg");
+  defeatScreen = loadImage("DefeatScreen.jpg");
   song = new SoundFile(this, "BTDsong.mp3");
   pop = new SoundFile(this, "Pop.mp3");
   //song.loop();
 }
 
 void draw(){
- 
-  if (hasStarted){ 
-    if (!song.isPlaying()){
+  if (!song.isPlaying()){
       song.play();
     }
+  if (hasStarted){ 
+    
     noStroke();
     //time = millis() * 1000;
     //print(time + "\n");
@@ -95,22 +123,46 @@ void draw(){
       round++;
       setTicks();
     }
+    if (lives <= 0) {
+      hasLost = true;
+    }
+    if (round > 10) {
+      hasWon = true;
+    }
+    
     ticks--;
+    if (hasLost || hasWon) hasStarted = false;
+  }
+  if (hasLost || hasWon) {
+    //song.stop();
+    imageMode(CENTER);
+    if (hasLost) {
+      defeatScreen.resize(0, 750);
+      //for (int i = 0; i < defeatScreen.width; i++){
+      //  for (int j = 0; j < defeatScreen.height; j++){
+      //    if (defeatScreen.get(i,j) == color(50,255,14)){
+      //      defeatScreen.set(0,0,0);
+      //    }
+      //  }
+      //}
+      image(defeatScreen, 600, 375);   
+    } else {
+      victoryScreen.resize(0, 750);
+      image(victoryScreen, 600, 375);
+    }
+    imageMode(CORNER);
+    Button restart = new Button("Restart", 125, 100, 150, 100);
+    restart.display();
+    if (mousePressed && restart.mouseIsOver()) {
+      restart();
+    }
   }
 }
 
-/*
-round 1 = 20 red
-round 2 = 35 red
-round 3 = 25 red, 10 blue
-round 4 = 35 red, 28 blue
-round 5 = 5 red, 27 blue, 4 green
-round 6 = 15 red, 15 blue, 10 green
-round 7 = 20 red, 20 blue, 20 green
-round 8 = 10 red, 20 blue, 30 green, 5 yellow
-round 9 = 30 green, 15 yellow
-round 10 = 102 blue, 30 green, 15 yellow, 4 pink
-*/
+void restart() {
+  song.stop();
+  setup();
+}
 
 void spawnBalloon() {
   if (ticks >= 0) {
@@ -200,23 +252,25 @@ void spawnBalloon() {
         else if(ticks % 10 == 0) makeBalloon(4);
       }
     }
-    //round 10 = 200 red, 100 blue, 30 green, 15 yellow, 5 pink
-    // 1020 ticks
+    //round 10 = 200 red, 70 blue, 30 green, 15 yellow, 5 pink
+    // 1000 ticks
     else if (round == 10) {
-      if (ticks < 1020){
-        //
+      if (ticks < 1000){
+        if (ticks % 5 == 0) makeBalloon(1);
+        if (ticks < 100 && ticks % 20 == 0) makeBalloon(5);
+        if (ticks % 10 == 0) {
+          if ((ticks / 10) % 10 < 3) makeBalloon(3);
+          else makeBalloon(2);
+          
+          //yellow walls
+          if (ticks >= 800 && ticks < 850) makeBalloon(4);
+          if (ticks >= 400 && ticks < 450) makeBalloon(4);
+          if (ticks < 50) makeBalloon(4);
+        }
       }
     }
   
   }
-  
-  //if (round == 1) {
-  //  for (int i = 199; i >= 0; i-=100){
-  //    if ( (i/100 % 2 == 0) && ticks >= i && ticks <= i + 100){
-  //      if(ticks % 10 == 0) makeBalloon(3);
-  //    }
-  //  }
-  //}
   
 }
 
@@ -251,22 +305,15 @@ void setTicks(){
   else if (round == 10){
     ticks = 1020;
   }
+  else if (round == 11){
+    ticks = 1020;
+  }
+  else if (round == 11){
+    ticks = 1020;
+  }
   ticks += 200;
   if (round > 1) bank += income;
 }
-
-/*
-round 1 = 20 red
-round 2 = 35 red
-round 3 = 25 red, 10 blue
-round 4 = 35 red, 28 blue
-round 5 = 5 red, 27 blue, 4 green
-round 6 = 15 red, 15 blue, 10 green
-round 7 = 20 red, 20 blue, 20 green
-round 8 = 10 red, 20 blue, 30 green, 5 yellow
-round 9 = 30 green, 15 yellow
-round 10 = 102 blue, 30 green, 15 yellow, 4 pink
-*/
 
 void displayTowerStats() {
   if (selectingTower) {
@@ -323,6 +370,7 @@ void displayStats(){
   textSize(32);
   textAlign(CENTER);
   text("Round: " + round, 1000, 50);
+  text("Towers", 1000, 250);
   textSize(20);
   text("Bank: " + bank, 1000, 100); 
   text("Income: " + income, 1000, 125); 
@@ -419,7 +467,8 @@ void moveBullets(){
           if (b.name.equals("bomb")) {
             for (int k = balloons.size() - 1; k >= 0; k--) {
               Balloon surroundingBalloon = balloons.get(k);
-              if (dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= b.splashRadius) {
+              if (surroundingBalloon.health != 6
+              && dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= b.splashRadius) {
                 int initial = balloon.health;
                 surroundingBalloon.decreaseHealth(b.damage);
                 if (surroundingBalloon.health <= 0) {
@@ -543,7 +592,7 @@ void dragTower() {
          //System.out.println("legal tower placement");
          towers.add(curTower);
          bank -= curTower.cost;
-         income -= (int) (curTower.cost * 0.07);
+         //income -= (int) (curTower.cost * 0.07);
        }
        curTower = null;
        selectedTower = null;
@@ -625,6 +674,12 @@ void moveBalloons(){
 void keyPressed(){
   if (key == 32){
     makeBalloon(6);
+  }
+  if (key == 'w') {
+    hasWon = true;
+  }
+  if (key == 'l') {
+    hasLost = true;
   }
 }
 

@@ -19,7 +19,7 @@ public class Button {
   void display() {
     stroke(255);
     rectMode(CENTER);
-    strokeWeight(2);
+    strokeWeight(5);
     fill(30, 90, 23);
     rect(x, y, w - 5, h - 5, 10);
     
