@@ -113,10 +113,6 @@ void draw(){
     displayStats();
     displayTowerStats();
     
-    if (time.getTime() <= 0){
-       //Display win message 
-    }
-    
     time.countUp();
     
     if (ticks <= 0 && balloons.size()==0){
@@ -126,7 +122,7 @@ void draw(){
     if (lives <= 0) {
       hasLost = true;
     }
-    if (round > 10) {
+    if (round > 12) {
       hasWon = true;
     }
     
@@ -269,6 +265,64 @@ void spawnBalloon() {
         }
       }
     }
+    //round 11 = 400 red, 100 blue, 50 green, 30 yellow, 10 black
+    //2000 ticks
+    else if (round == 11) {
+      if (ticks < 2000){
+        //red
+        if (ticks % 5 == 0) makeBalloon(1);
+        
+        //blue and green
+        if (ticks % 10 == 0) {
+          if ((ticks / 10) % 3 < 2) makeBalloon(2);
+          else makeBalloon(3);
+          
+          //yellow 
+          if (ticks >= 1800 && ticks < 1850) makeBalloon(4);
+          if (ticks >= 1000 && ticks < 1050) makeBalloon(4);
+          if (ticks >= 600 && ticks < 650) makeBalloon(4);
+          if (ticks < 150) makeBalloon(4);
+          
+          //black
+          if (ticks >= 150 && ticks < 250) makeBalloon(6);
+        }
+      }
+    }
+    //round 12 = 1000 red, 300 blue, 200 green, 50 yellow, 20 pink, 20 black
+    //5000 ticks
+    else if (round == 12) {
+      if (ticks < 5000){
+        //red
+        if (ticks % 5 == 0) makeBalloon(1);
+        
+        //pink
+        if (ticks % 20 == 0) {
+          if (ticks >= 3700 && ticks < 3800) makeBalloon(5);
+          if (ticks >= 1400 && ticks < 1600) makeBalloon(5);
+          if (ticks < 100) makeBalloon(5);
+        }
+        
+        //blue and green
+        if (ticks % 10 == 0) {
+          if ((ticks / 10) % 5 < 3) makeBalloon(2);
+          else makeBalloon(3);
+          
+          //yellow 
+          if (ticks >= 4800 && ticks < 4700) makeBalloon(4); //10
+          if (ticks >= 4000 && ticks < 4050) makeBalloon(4); //5
+          if (ticks >= 3500 && ticks < 3550) makeBalloon(4); //5
+          if (ticks >= 3000 && ticks < 3050) makeBalloon(4); //5
+          if (ticks >= 2500 && ticks < 2550) makeBalloon(4); //5
+          if (ticks >= 2000 && ticks < 2050) makeBalloon(4); //5
+          if (ticks >= 850 && ticks < 1000) makeBalloon(4); //15
+          
+          //black
+          if (ticks >= 4200 && ticks < 4250) makeBalloon(6);
+          if (ticks >= 2750 && ticks < 2780) makeBalloon(6);
+          if (ticks >= 150 && ticks < 250) makeBalloon(6);
+        }
+      }
+    }
   
   }
   
@@ -303,13 +357,13 @@ void setTicks(){
     ticks = 950;
   }
   else if (round == 10){
-    ticks = 1020;
+    ticks = 1000;
   }
   else if (round == 11){
-    ticks = 1020;
+    ticks = 2000;
   }
-  else if (round == 11){
-    ticks = 1020;
+  else if (round == 12){
+    ticks = 5000;
   }
   ticks += 200;
   if (round > 1) bank += income;
