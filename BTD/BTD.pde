@@ -7,7 +7,6 @@ int[][] background = pumpkinPatch();
 int colPatch;
 int rowPatch;
 int bank;
-//int bank = 1000000;
 
 int income; 
 int ticks;
@@ -288,18 +287,17 @@ void spawnBalloon() {
         }
       }
     }
-    //round 12 = 1000 red, 300 blue, 200 green, 50 yellow, 20 pink, 20 black
+    //round 12 = 1000 red, 300 blue, 200 green, 100 yellow, 100 pink, 50 black, 20 white
     //5000 ticks
     else if (round == 12) {
       if (ticks < 5000){
         //red
         if (ticks % 5 == 0) makeBalloon(1);
         
-        //pink
-        if (ticks % 20 == 0) {
-          if (ticks >= 3700 && ticks < 3800) makeBalloon(5);
-          if (ticks >= 1400 && ticks < 1600) makeBalloon(5);
-          if (ticks < 100) makeBalloon(5);
+        //pink and yellow
+        if (ticks % 50 == 0) {
+          makeBalloon(5);
+          makeBalloon(4);
         }
         
         //blue and green
@@ -307,19 +305,20 @@ void spawnBalloon() {
           if ((ticks / 10) % 5 < 3) makeBalloon(2);
           else makeBalloon(3);
           
-          //yellow 
-          if (ticks >= 4800 && ticks < 4700) makeBalloon(4); //10
-          if (ticks >= 4000 && ticks < 4050) makeBalloon(4); //5
-          if (ticks >= 3500 && ticks < 3550) makeBalloon(4); //5
-          if (ticks >= 3000 && ticks < 3050) makeBalloon(4); //5
-          if (ticks >= 2500 && ticks < 2550) makeBalloon(4); //5
-          if (ticks >= 2000 && ticks < 2050) makeBalloon(4); //5
-          if (ticks >= 850 && ticks < 1000) makeBalloon(4); //15
           
           //black
-          if (ticks >= 4200 && ticks < 4250) makeBalloon(6);
-          if (ticks >= 2750 && ticks < 2780) makeBalloon(6);
-          if (ticks >= 150 && ticks < 250) makeBalloon(6);
+          if (ticks >= 4800 && ticks < 4700) makeBalloon(6); //10
+          if (ticks >= 4000 && ticks < 4050) makeBalloon(6); //5
+          if (ticks >= 3500 && ticks < 3550) makeBalloon(6); //5
+          if (ticks >= 3000 && ticks < 3050) makeBalloon(6); //5
+          if (ticks >= 2500 && ticks < 2550) makeBalloon(6); //5
+          if (ticks >= 2000 && ticks < 2050) makeBalloon(6); //5
+          if (ticks >= 850 && ticks < 1000) makeBalloon(6); //15
+          
+          //white
+          if (ticks >= 4200 && ticks < 4250) makeBalloon(9);
+          if (ticks >= 2750 && ticks < 2800) makeBalloon(9);
+          if (ticks >= 150 && ticks < 250) makeBalloon(9);
         }
       }
     }
@@ -423,7 +422,7 @@ void displayTowerStats() {
 void displayStats(){
   textSize(32);
   textAlign(CENTER);
-  text("Round: " + round, 1000, 50);
+  text("Round: " + round + "/12", 1000, 50);
   text("Towers", 1000, 250);
   textSize(20);
   text("Bank: " + bank, 1000, 100); 
@@ -523,7 +522,7 @@ void moveBullets(){
               Balloon surroundingBalloon = balloons.get(k);
               if (surroundingBalloon.health != 6
               && dist(b.curX, b.curY, surroundingBalloon.curX, surroundingBalloon.curY) <= b.splashRadius) {
-                int initial = balloon.health;
+                int initial = surroundingBalloon.health;
                 surroundingBalloon.decreaseHealth(b.damage);
                 if (surroundingBalloon.health <= 0) {
                   income += initial;
@@ -725,17 +724,17 @@ void moveBalloons(){
   
 }
 
-void keyPressed(){
-  if (key == 32){
-    makeBalloon(6);
-  }
-  if (key == 'w') {
-    hasWon = true;
-  }
-  if (key == 'l') {
-    hasLost = true;
-  }
-}
+//void keyPressed(){
+//  if (key == 32){
+//    makeBalloon(3);
+//  }
+//  if (key == 'w') {
+//    hasWon = true;
+//  }
+//  if (key == 'l') {
+//    hasLost = true;
+//  }
+//}
 
 int[] locatePatch() {
   return new int[] { (int) mouseX / 50, (int) mouseY / 50 };

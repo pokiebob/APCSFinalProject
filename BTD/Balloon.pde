@@ -56,6 +56,10 @@ public class Balloon {
       c = color(0);
       speed = 2;
     }
+    else if (health <= 9) {
+      c = color(255);
+      speed = 3;
+    }
     smooth();
     stroke(0);
     fill(c);

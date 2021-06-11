@@ -24,7 +24,7 @@ public class Sniper extends Tower {
       level = 3;
       speed -= 0.3;
       damage = 7;
-      upgradeCost = 400;
+      upgradeCost = 600;
     }
     else if (level == 3) {
       level = 4;
