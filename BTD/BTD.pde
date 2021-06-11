@@ -35,7 +35,7 @@ void setup(){
   colPatch = 16;
   rowPatch = 15;
   bank = 650;
-  income = 100;
+  income = 150;
   ticks = 0;
   lives = 150;
   level = 1;
